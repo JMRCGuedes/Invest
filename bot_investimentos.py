@@ -157,10 +157,11 @@ for ativo in ATIVOS:
             dinheiro += portfolio[ativo] * close
             portfolio[ativo] = 0
 
-        # -------- ADICIONAR AO HISTÓRICO --------
+        # -------- ADICIONAR AO HISTÓRICO COM TIPO DE ATIVO --------
         historico.append({
             "Data": datetime.now().strftime("%Y-%m-%d %H:%M"),
             "Ativo": ativo,
+            "Tipo": "Ação" if ativo in ACOES else "ETF",
             "Preço": round(close, 2),
             "RSI": round(rsi, 2) if not pd.isna(rsi) else None,
             "Sinal": sinal,
@@ -194,4 +195,5 @@ print("💰 Dinheiro final:", round(dinheiro, 2))
 print("📊 Portfólio (posições abertas):")
 for ativo, qtd in portfolio.items():
     if qtd > 0:
-        print(f"  {ativo}: {qtd}")
+        tipo = "Ação" if ativo in ACOES else "ETF"
+        print(f"  {ativo} ({tipo}): {qtd}")
