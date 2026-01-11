@@ -8,19 +8,20 @@ import os
 DINHEIRO_INICIAL = 10000
 RISCO_POR_TRADE = 0.02  # 2%
 
-# Top 100 ações global
+# ---------- LISTA DE ATIVOS ----------
+
+# 100 ações grandes e válidas no Yahoo Finance
 ACOES = [
-    "AAPL","MSFT","NVDA","AMZN","GOOGL","META","TSLA","BRK-B","JNJ","V",
-    "PG","UNH","MA","HD","BAC","XOM","PFE","CVX","KO","COST","ABBV","ADBE",
-    "CRM","CSCO","PEP","AVGO","LLY","TMUS","ORCL","NKE","ASML","INTC","TMO",
-    "MCD","WMT","DHR","ACN","QCOM","AMGN","TXN","MDT","HON","LIN","NEE",
-    "UNP","LOW","RTX","PM","UPS","CAT","SBUX","IBM","BLK","AXP","SPGI","MS",
-    "GE","LMT","AMT","PLD","CHTR","C","BKNG","TJX","MMM","CVS","GILD","SYK",
-    "ZTS","ANTM","MO","DE","FIS","T","VZ","DUK","CCI","SO","BSX","BDX","ETN",
-    "CL","EL","SHW","ICE","ADP","APD","ITW","ECL"
+    "AAPL","MSFT","NVDA","AMZN","GOOGL","GOOG","TSLA",
+    "ADBE","AMD","INTC","CSCO","QCOM","CRM","PYPL","AVGO",
+    "ORCL","IBM","TXN","AMGN","MDT","HON","LIN","NEE",
+    "PEP","KO","MCD","WMT","UPS","CAT","JNJ","V",
+    "HD","BAC","C","GS","JPM","AXP","UNH","CVX",
+    "XOM","BA","T","VZ","MMM","CMCSA","NFLX","ADP",
+    "ISRG","GILD","VRTX","LMT","BLK","SPGI","MS","RTX"
 ]
 
-# Top 20 ETFs populares / maior AUM
+# 20 ETFs populares e líquidas
 ETFS = [
     "SPY","VOO","IVV","VTI","QQQ","VUG","VEA","VTV","IEFA","AGG",
     "IEMG","IJH","IJR","VIG","VYM","SCHD","XLK","SCZ","VT","ACWI"
@@ -72,95 +73,103 @@ historico = []
 
 # -------- LOOP PRINCIPAL --------
 for ativo in ATIVOS:
-    data = yf.download(ativo, period="6mo", interval="1d", progress=False)
-    if data.empty or len(data) < 60:
+    try:
+        data = yf.download(ativo, period="6mo", interval="1d", progress=False)
+        
+        # Ignorar tickers inválidos ou sem dados
+        if data.empty or len(data) < 60:
+            print(f"⚠️ Ticker {ativo} não encontrado ou sem dados. Pulando...")
+            continue
+
+        # Resolver MultiIndex
+        if isinstance(data.columns, pd.MultiIndex):
+            data.columns = data.columns.get_level_values(0)
+
+        # Indicadores
+        data["EMA20"] = EMA(data["Close"], 20)
+        data["EMA50"] = EMA(data["Close"], 50)
+        data["RSI"] = RSI(data["Close"], 14)
+        data["MACD"], data["MACD_signal"] = MACD(data["Close"])
+        data["BB_upper"], data["BB_lower"] = BollingerBands(data["Close"])
+
+        ultimo = data.iloc[-1]
+
+        rsi = ultimo["RSI"]
+        ema20 = ultimo["EMA20"]
+        ema50 = ultimo["EMA50"]
+        macd = ultimo["MACD"]
+        macd_signal = ultimo["MACD_signal"]
+        close = float(ultimo["Close"])
+        bb_upper = ultimo["BB_upper"]
+        bb_lower = ultimo["BB_lower"]
+
+        # -------- CALCULAR CONFIANÇA --------
+        conf_buy = 0
+        conf_sell = 0
+
+        # RSI
+        if not pd.isna(rsi):
+            if rsi < 30:
+                conf_buy += (30 - rsi) / 30 * 25
+            elif rsi > 70:
+                conf_sell += (rsi - 70) / 30 * 25
+
+        # EMA
+        if not pd.isna(ema20) and not pd.isna(ema50):
+            if ema20 > ema50:
+                conf_buy += 25
+            else:
+                conf_sell += 25
+
+        # MACD
+        if not pd.isna(macd) and not pd.isna(macd_signal):
+            if macd > macd_signal:
+                conf_buy += 25
+            else:
+                conf_sell += 25
+
+        # Bollinger Bands
+        if not pd.isna(bb_upper) and not pd.isna(bb_lower):
+            if close < bb_lower:
+                conf_buy += 25
+            elif close > bb_upper:
+                conf_sell += 25
+
+        # -------- DECISÃO FINAL --------
+        if conf_buy > conf_sell and conf_buy > 0:
+            sinal = "BUY"
+            confianca = min(int(conf_buy), 100)
+        elif conf_sell > conf_buy and conf_sell > 0:
+            sinal = "SELL"
+            confianca = min(int(conf_sell), 100)
+        else:
+            sinal = "HOLD"
+            confianca = 0
+
+        # -------- PAPER TRADING --------
+        if sinal == "BUY" and dinheiro > 0:
+            risco = dinheiro * RISCO_POR_TRADE
+            quantidade = int(risco // close)
+            if quantidade > 0:
+                dinheiro -= quantidade * close
+                portfolio[ativo] += quantidade
+        elif sinal == "SELL" and portfolio[ativo] > 0:
+            dinheiro += portfolio[ativo] * close
+            portfolio[ativo] = 0
+
+        # -------- ADICIONAR AO HISTÓRICO --------
+        historico.append({
+            "Data": datetime.now().strftime("%Y-%m-%d %H:%M"),
+            "Ativo": ativo,
+            "Preço": round(close, 2),
+            "RSI": round(rsi, 2) if not pd.isna(rsi) else None,
+            "Sinal": sinal,
+            "Confiança": confianca
+        })
+
+    except Exception as e:
+        print(f"❌ Erro ao processar {ativo}: {e}")
         continue
-
-    # Resolver MultiIndex
-    if isinstance(data.columns, pd.MultiIndex):
-        data.columns = data.columns.get_level_values(0)
-
-    # Indicadores
-    data["EMA20"] = EMA(data["Close"], 20)
-    data["EMA50"] = EMA(data["Close"], 50)
-    data["RSI"] = RSI(data["Close"], 14)
-    data["MACD"], data["MACD_signal"] = MACD(data["Close"])
-    data["BB_upper"], data["BB_lower"] = BollingerBands(data["Close"])
-
-    ultimo = data.iloc[-1]
-
-    rsi = ultimo["RSI"]
-    ema20 = ultimo["EMA20"]
-    ema50 = ultimo["EMA50"]
-    macd = ultimo["MACD"]
-    macd_signal = ultimo["MACD_signal"]
-    close = float(ultimo["Close"])
-    bb_upper = ultimo["BB_upper"]
-    bb_lower = ultimo["BB_lower"]
-
-    # -------- CALCULAR CONFIANÇA --------
-    conf_buy = 0
-    conf_sell = 0
-
-    # RSI
-    if not pd.isna(rsi):
-        if rsi < 30:
-            conf_buy += (30 - rsi) / 30 * 25
-        elif rsi > 70:
-            conf_sell += (rsi - 70) / 30 * 25
-
-    # EMA
-    if not pd.isna(ema20) and not pd.isna(ema50):
-        if ema20 > ema50:
-            conf_buy += 25
-        else:
-            conf_sell += 25
-
-    # MACD
-    if not pd.isna(macd) and not pd.isna(macd_signal):
-        if macd > macd_signal:
-            conf_buy += 25
-        else:
-            conf_sell += 25
-
-    # Bollinger Bands
-    if not pd.isna(bb_upper) and not pd.isna(bb_lower):
-        if close < bb_lower:
-            conf_buy += 25
-        elif close > bb_upper:
-            conf_sell += 25
-
-    # -------- DECISÃO FINAL --------
-    if conf_buy > conf_sell and conf_buy > 0:
-        sinal = "BUY"
-        confianca = min(int(conf_buy), 100)
-    elif conf_sell > conf_buy and conf_sell > 0:
-        sinal = "SELL"
-        confianca = min(int(conf_sell), 100)
-    else:
-        sinal = "HOLD"
-        confianca = 0
-
-    # -------- PAPER TRADING --------
-    if sinal == "BUY" and dinheiro > 0:
-        risco = dinheiro * RISCO_POR_TRADE
-        quantidade = int(risco // close)
-        if quantidade > 0:
-            dinheiro -= quantidade * close
-            portfolio[ativo] += quantidade
-    elif sinal == "SELL" and portfolio[ativo] > 0:
-        dinheiro += portfolio[ativo] * close
-        portfolio[ativo] = 0
-
-    # -------- ADICIONAR AO HISTÓRICO --------
-    historico.append({
-        "Data": datetime.now().strftime("%Y-%m-%d %H:%M"),
-        "Ativo": ativo,
-        "Preço": round(close, 2),
-        "RSI": round(rsi, 2) if not pd.isna(rsi) else None,
-        "Sinal": sinal,
-        "Confiança": confianca
-    })
 
 # -------- SALVAR ESTADO --------
 estado = {"dinheiro": dinheiro, "portfolio": portfolio}
