@@ -1,0 +1,39 @@
+name: Rodar Bot Diário
+
+# Trigger diário às 9h UTC (6h Portugal)
+on:
+  schedule:
+    - cron: "0 9 * * *"
+  workflow_dispatch: # permite rodar manualmente se quiseres
+
+jobs:
+  run-colab-notebook:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.10
+
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install yfinance pandas pandas-ta
+
+    - name: Run bot
+      run: |
+        python bot_investimentos.py
+
+    - name: Commit resultados
+      run: |
+        git config --global user.name "github-actions"
+        git config --global user.email "github-actions@github.com"
+        git add estado.json historico_total.csv relatorio_diario.csv
+        git commit -m "Atualizar resultados diários"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
