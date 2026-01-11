@@ -2,7 +2,7 @@ name: Rodar Bot Diário
 
 on:
   schedule:
-    - cron: "0 9 * * *"
+    - cron: "0 9 * * *"  # Todos os dias às 9h UTC
   workflow_dispatch:
 
 jobs:
@@ -10,24 +10,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Puxar código
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      # 2️⃣ Setup Python
       - name: Setup Python 3.10
         uses: actions/setup-python@v4
         with:
           python-version: 3.10.13
 
+      # 3️⃣ Instalar dependências
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install yfinance pandas==2.2.0
-          pip install pandas-ta==0.3.20b0
+          pip install yfinance pandas
 
+      # 4️⃣ Rodar bot
       - name: Run bot
-        run: |
-          python bot_investimentos.py
+        run: python bot_investimentos.py
 
+      # 5️⃣ Commit automático dos resultados
       - name: Commit resultados
         run: |
           git config --global user.name "github-actions"
