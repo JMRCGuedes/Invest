@@ -2,7 +2,7 @@ name: Rodar Bot Diário
 
 on:
   schedule:
-    - cron: "0 9 * * *" # Todos os dias às 9h UTC (6h Portugal)
+    - cron: "0 9 * * *"
   workflow_dispatch:
 
 jobs:
@@ -21,7 +21,8 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install yfinance pandas pandas_ta
+          pip install yfinance pandas==2.2.0
+          pip install pandas-ta==0.3.20b0
 
       - name: Run bot
         run: |
