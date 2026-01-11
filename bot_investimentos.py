@@ -7,10 +7,10 @@ import os
 # -------- CONFIGURAÇÃO --------
 DINHEIRO_INICIAL = 10000
 RISCO_POR_TRADE = 0.02  # 2%
+DIAS_FUTURO_BACKTEST = 5  # Quantos dias à frente avaliar acertos
 
 # ---------- LISTA DE ATIVOS ----------
 
-# 100 ações grandes e válidas no Yahoo Finance
 ACOES = [
     "AAPL","MSFT","NVDA","AMZN","GOOGL","GOOG","TSLA",
     "ADBE","AMD","INTC","CSCO","QCOM","CRM","PYPL","AVGO",
@@ -21,7 +21,6 @@ ACOES = [
     "ISRG","GILD","VRTX","LMT","BLK","SPGI","MS","RTX"
 ]
 
-# 20 ETFs populares e líquidas
 ETFS = [
     "SPY","VOO","IVV","VTI","QQQ","VUG","VEA","VTV","IEFA","AGG",
     "IEMG","IJH","IJR","VIG","VYM","SCHD","XLK","SCZ","VT","ACWI"
@@ -59,6 +58,72 @@ def BollingerBands(series, period=20, std_dev=2):
     lower = sma - std_dev * std
     return upper, lower
 
+# -------- BACKTESTING SIMPLES --------
+def backtest(data, dias_futuro=DIAS_FUTURO_BACKTEST):
+    acertos_buy = 0
+    total_buy = 0
+    acertos_sell = 0
+    total_sell = 0
+
+    for i in range(len(data) - dias_futuro):
+        row = data.iloc[i]
+        futuro = data.iloc[i + dias_futuro]
+        close = row["Close"]
+
+        rsi = row["RSI"]
+        ema20 = row["EMA20"]
+        ema50 = row["EMA50"]
+        macd = row["MACD"]
+        macd_signal = row["MACD_signal"]
+        bb_upper = row["BB_upper"]
+        bb_lower = row["BB_lower"]
+
+        conf_buy = 0
+        conf_sell = 0
+
+        # RSI
+        if not pd.isna(rsi):
+            if rsi < 30:
+                conf_buy += (30 - rsi) / 30 * 25
+            elif rsi > 70:
+                conf_sell += (rsi - 70) / 30 * 25
+
+        # EMA
+        if not pd.isna(ema20) and not pd.isna(ema50):
+            if ema20 > ema50:
+                conf_buy += 25
+            else:
+                conf_sell += 25
+
+        # MACD
+        if not pd.isna(macd) and not pd.isna(macd_signal):
+            if macd > macd_signal:
+                conf_buy += 25
+            else:
+                conf_sell += 25
+
+        # Bollinger Bands
+        if not pd.isna(bb_upper) and not pd.isna(bb_lower):
+            if close < bb_lower:
+                conf_buy += 25
+            elif close > bb_upper:
+                conf_sell += 25
+
+        # Avaliar acertos
+        if conf_buy > conf_sell:
+            total_buy += 1
+            if futuro["Close"] > close:
+                acertos_buy += 1
+        elif conf_sell > conf_buy:
+            total_sell += 1
+            if futuro["Close"] < close:
+                acertos_sell += 1
+
+    taxa_buy = acertos_buy / total_buy if total_buy > 0 else 0
+    taxa_sell = acertos_sell / total_sell if total_sell > 0 else 0
+
+    return taxa_buy, taxa_sell
+
 # -------- CARREGAR ESTADO --------
 if os.path.exists(ESTADO_FICHEIRO):
     with open(ESTADO_FICHEIRO, "r") as f:
@@ -75,13 +140,10 @@ historico = []
 for ativo in ATIVOS:
     try:
         data = yf.download(ativo, period="6mo", interval="1d", progress=False)
-        
-        # Ignorar tickers inválidos ou sem dados
         if data.empty or len(data) < 60:
             print(f"⚠️ Ticker {ativo} não encontrado ou sem dados. Pulando...")
             continue
 
-        # Resolver MultiIndex
         if isinstance(data.columns, pd.MultiIndex):
             data.columns = data.columns.get_level_values(0)
 
@@ -91,6 +153,9 @@ for ativo in ATIVOS:
         data["RSI"] = RSI(data["Close"], 14)
         data["MACD"], data["MACD_signal"] = MACD(data["Close"])
         data["BB_upper"], data["BB_lower"] = BollingerBands(data["Close"])
+
+        # Backtesting para ajustar confiança
+        taxa_buy, taxa_sell = backtest(data)
 
         ultimo = data.iloc[-1]
 
@@ -135,6 +200,10 @@ for ativo in ATIVOS:
             elif close > bb_upper:
                 conf_sell += 25
 
+        # Ajustar confiança baseada no histórico (backtesting)
+        conf_buy *= taxa_buy
+        conf_sell *= taxa_sell
+
         # -------- DECISÃO FINAL --------
         if conf_buy > conf_sell and conf_buy > 0:
             sinal = "BUY"
@@ -165,7 +234,9 @@ for ativo in ATIVOS:
             "Preço": round(close, 2),
             "RSI": round(rsi, 2) if not pd.isna(rsi) else None,
             "Sinal": sinal,
-            "Confiança": confianca
+            "Confiança": confianca,
+            "Taxa_Acerto_Buy": round(taxa_buy*100,2),
+            "Taxa_Acerto_Sell": round(taxa_sell*100,2)
         })
 
     except Exception as e:
