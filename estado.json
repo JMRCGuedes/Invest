@@ -1,14 +1,14 @@
 {
-  "dinheiro": 10000,
+  "dinheiro": 7150.820014953613,
   "portfolio": {
     "AAPL": 0,
     "MSFT": 0,
     "GOOGL": 0,
     "AMZN": 0,
-    "NVDA": 0,
+    "NVDA": 1,
     "SPY": 0,
     "QQQ": 0,
     "VTI": 0,
-    "XLK": 0
+    "XLK": 1
   }
 }
