@@ -49,3 +49,10 @@ Começar com pequenas ordens ou simular ainda mais
 # 1️⃣ Notificar por telegram quando comprar/vender
 
 Perceberr os padroes de quando comprar e vender para enviar notificações na altura de compra/venda
+
+
+# 1️⃣ Quais as açoes/ETF que teve dureante mais tempo
+
+De forma a percer quais são as mais confivies
+
+# 1️⃣ Quais as açoes/ETF que  deram mais rentabilidade
