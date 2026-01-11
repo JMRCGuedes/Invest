@@ -1,5 +1,8 @@
 name: Rodar Bot Diário
 
+permissions:
+  contents: write
+
 on:
   schedule:
     - cron: "0 9 * * *"  # Todos os dias às 9h UTC
