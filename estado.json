@@ -1,5 +1,5 @@
 {
-  "dinheiro": 2593.1847705841064,
+  "dinheiro": 2517.4670696258545,
   "portfolio": {
     "AAPL": 0,
     "MSFT": 0,
@@ -10,7 +10,7 @@
     "TSLA": 0,
     "ADBE": 0,
     "AMD": 0,
-    "INTC": 21,
+    "INTC": 22,
     "CSCO": 6,
     "QCOM": 1,
     "CRM": 0,
@@ -71,7 +71,7 @@
     "IJR": 1,
     "VIG": 0,
     "VYM": 0,
-    "SCHD": 50,
+    "SCHD": 51,
     "XLK": 0,
     "SCZ": 3,
     "VT": 0,
