@@ -196,9 +196,12 @@ with open(STATE_FILE, "w") as file:
         "portfolio": portfolio
     }, file, indent=2)
 
-pd.DataFrame(trade_log)\
-    .sort_values("confidence", ascending=False)\
-    .to_csv(DAILY_REPORT_FILE, index=False)
+trade_dataframe = pd.DataFrame(trade_log)
+
+if not trade_dataframe.empty and "confidence" in trade_dataframe.columns:
+    trade_dataframe = trade_dataframe.sort_values("confidence", ascending=False)
+
+trade_dataframe.to_csv(DAILY_REPORT_FILE, index=False)
 
 # =========================================================
 # PORTFOLIO PERFORMANCE
