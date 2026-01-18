@@ -5,7 +5,7 @@ permissions:
 
 on:
   schedule:
-    - cron: "0 * * * *"  # a cada hora no minuto 0
+    - cron: "0 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Puxar código
+      # 1️⃣ Pull code
       - name: Checkout repo
         uses: actions/checkout@v3
 
@@ -23,23 +23,23 @@ jobs:
         with:
           python-version: 3.10.13
 
-      # 3️⃣ Instalar dependências
-      - name: Install dependencies
+      # 3️⃣ Install deps
+      - name: Install deps
         run: |
           python -m pip install --upgrade pip
           pip install yfinance pandas
 
-      # 4️⃣ Rodar bot
+      # 4️⃣ Run bot
       - name: Run bot
         run: python investment_bot.py
 
-      # 5️⃣ Commit automático dos resultados
-      - name: Commit resultados
+      # 5️⃣ Commit results
+      - name: Commit results
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git add estado.json historico_total.csv relatorio_diario.csv
-          git commit -m "Atualizar resultados diários" || echo "Nada para commitar"
+          git add state.json trade_history.csv daily_signals.csv
+          git commit -m "Update daily results" || echo "Nothing to commit"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
