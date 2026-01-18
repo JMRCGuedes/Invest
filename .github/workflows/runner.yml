@@ -38,7 +38,7 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git add state.json trade_history.csv daily_signals.csv
+          git add .
           git commit -m "Update daily results" || echo "Nothing to commit"
           git push
         env:
