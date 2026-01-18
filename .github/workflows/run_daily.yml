@@ -31,7 +31,7 @@ jobs:
 
       # 4️⃣ Rodar bot
       - name: Run bot
-        run: python bot_investimentos.py
+        run: python investment_bot.py
 
       # 5️⃣ Commit automático dos resultados
       - name: Commit resultados
