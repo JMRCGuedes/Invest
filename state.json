@@ -1,0 +1,237 @@
+{
+  "available_cash": 10000,
+  "portfolio": {
+    "AAPL": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "MSFT": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "NVDA": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "AMZN": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "GOOGL": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "GOOG": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "TSLA": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "META": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "ADBE": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "AMD": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "INTC": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "CSCO": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "QCOM": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "CRM": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "AVGO": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "ORCL": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "IBM": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "TXN": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "AMGN": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "HON": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "PEP": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "KO": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "MCD": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "WMT": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "CAT": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "JNJ": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "V": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "HD": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "BAC": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "JPM": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "UNH": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "CVX": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "XOM": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "NFLX": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "LMT": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "BLK": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "SPGI": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "MS": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "RTX": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "SPY": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "VOO": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "IVV": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "VTI": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "QQQ": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "VUG": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "VEA": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "VTV": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "IEFA": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "AGG": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "IEMG": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "IJH": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "IJR": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "VIG": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "VYM": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "SCHD": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "XLK": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "VT": {
+      "quantity": 0,
+      "average_price": 0
+    },
+    "ACWI": {
+      "quantity": 0,
+      "average_price": 0
+    }
+  }
+}
