@@ -10,11 +10,12 @@ import os
 INITIAL_CAPITAL = 10_000
 RISK_PER_TRADE = 0.02
 BACKTEST_LOOKAHEAD_DAYS = 5
+TRADE_CONFIDENCE_THRESHOLD = 30
 
 STATE_FILE = "state.json"
-HISTORY_FILE = "trade_history.csv"
-DAILY_REPORT_FILE = "daily_signals.csv"
-PORTFOLIO_DETAIL_FILE = "portfolio_details.csv"
+TRADE_HISTORY_FILE = "trade_history.csv"
+DAILY_SIGNALS_FILE = "daily_signals.csv"
+PORTFOLIO_DETAILS_FILE = "portfolio_details.csv"
 PORTFOLIO_SUMMARY_FILE = "portfolio_summary.csv"
 
 # =========================================================
@@ -53,39 +54,45 @@ def macd_indicator(series):
     signal_line = exponential_moving_average(macd_line, 9)
     return macd_line, signal_line
 
-def bollinger_bands(series, period=20):
-    moving_average = series.rolling(period).mean()
-    standard_deviation = series.rolling(period).std()
-    upper_band = moving_average + 2 * standard_deviation
-    lower_band = moving_average - 2 * standard_deviation
-    return upper_band, lower_band
-
 # =========================================================
 # BACKTESTING
 # =========================================================
-def run_backtest(dataframe):
+def run_backtest(df):
     buy_wins = buy_total = sell_wins = sell_total = 0
 
-    for index in range(len(dataframe) - BACKTEST_LOOKAHEAD_DAYS):
-        current = dataframe.iloc[index]
-        future = dataframe.iloc[index + BACKTEST_LOOKAHEAD_DAYS]
+    for i in range(len(df) - BACKTEST_LOOKAHEAD_DAYS):
+        current = df.iloc[i]
+        future = df.iloc[i + BACKTEST_LOOKAHEAD_DAYS]
 
-        buy_score = sell_score = 0
+        if pd.isna(current["RSI"]) or pd.isna(current["EMA20"]) or pd.isna(current["EMA50"]) or pd.isna(current["MACD"]):
+            continue
 
-        if current.RSI < 30: buy_score += 25
-        if current.RSI > 70: sell_score += 25
-        buy_score += 25 if current.EMA20 > current.EMA50 else 0
-        sell_score += 25 if current.EMA20 <= current.EMA50 else 0
-        buy_score += 25 if current.MACD > current.MACD_SIGNAL else 0
-        sell_score += 25 if current.MACD <= current.MACD_SIGNAL else 0
+        buy_score = 0
+        sell_score = 0
+
+        if current["RSI"] < 30:
+            buy_score += 25
+        if current["RSI"] > 70:
+            sell_score += 25
+
+        if current["EMA20"] > current["EMA50"]:
+            buy_score += 25
+        else:
+            sell_score += 25
+
+        if current["MACD"] > current["MACD_SIGNAL"]:
+            buy_score += 25
+        else:
+            sell_score += 25
 
         if buy_score > sell_score:
             buy_total += 1
-            if future.Close > current.Close:
+            if future["Close"] > current["Close"]:
                 buy_wins += 1
+
         elif sell_score > buy_score:
             sell_total += 1
-            if future.Close < current.Close:
+            if future["Close"] < current["Close"]:
                 sell_wins += 1
 
     buy_accuracy = buy_wins / buy_total if buy_total else 0.5
@@ -94,7 +101,7 @@ def run_backtest(dataframe):
     return buy_accuracy, sell_accuracy
 
 # =========================================================
-# LOAD OR INITIALIZE STATE
+# LOAD STATE
 # =========================================================
 if os.path.exists(STATE_FILE):
     with open(STATE_FILE, "r") as file:
@@ -103,152 +110,178 @@ if os.path.exists(STATE_FILE):
         portfolio = state["portfolio"]
 else:
     available_cash = INITIAL_CAPITAL
-    portfolio = {
-        asset: {"quantity": 0, "average_price": 0}
-        for asset in ALL_ASSETS
-    }
+    portfolio = {asset: {"quantity": 0, "average_price": 0} for asset in ALL_ASSETS}
 
 trade_log = []
 
 # =========================================================
-# MAIN EXECUTION
+# MAIN LOOP
 # =========================================================
 for asset in ALL_ASSETS:
+    print(f"Processing {asset}")
     try:
-        price_data = yf.download(asset, period="6mo", progress=False)
-        if price_data.empty:
+        df = yf.download(asset, period="6mo", progress=False, auto_adjust=False)
+
+        # 🔥 FIX CRÍTICO: flatten columns if MultiIndex
+        if isinstance(df.columns, pd.MultiIndex):
+            df.columns = df.columns.get_level_values(0)
+
+
+        if df.empty or len(df) < 60:
+            print(f"Skipping {asset}: insufficient data")
             continue
 
-        price_data["EMA20"] = exponential_moving_average(price_data.Close, 20)
-        price_data["EMA50"] = exponential_moving_average(price_data.Close, 50)
-        price_data["RSI"] = relative_strength_index(price_data.Close)
-        price_data["MACD"], price_data["MACD_SIGNAL"] = macd_indicator(price_data.Close)
-        price_data["BB_UPPER"], price_data["BB_LOWER"] = bollinger_bands(price_data.Close)
+        df["EMA20"] = exponential_moving_average(df["Close"], 20)
+        df["EMA50"] = exponential_moving_average(df["Close"], 50)
+        df["RSI"] = relative_strength_index(df["Close"])
+        df["MACD"], df["MACD_SIGNAL"] = macd_indicator(df["Close"])
 
-        buy_accuracy, sell_accuracy = run_backtest(price_data)
-        latest = price_data.iloc[-1]
-        current_price = float(latest.Close)
+        buy_acc, sell_acc = run_backtest(df)
 
-        buy_confidence = sell_confidence = 0
+        latest = df.iloc[-1]
 
-        if latest.RSI < 30: buy_confidence += 25
-        if latest.RSI > 70: sell_confidence += 25
-        buy_confidence += 25 if latest.EMA20 > latest.EMA50 else 0
-        sell_confidence += 25 if latest.EMA20 <= latest.EMA50 else 0
-        buy_confidence += 25 if latest.MACD > latest.MACD_SIGNAL else 0
-        sell_confidence += 25 if latest.MACD <= latest.MACD_SIGNAL else 0
+        latest_rsi = latest["RSI"]
+        latest_ema20 = latest["EMA20"]
+        latest_ema50 = latest["EMA50"]
+        latest_macd = latest["MACD"]
+        latest_macd_signal = latest["MACD_SIGNAL"]
 
-        buy_confidence *= buy_accuracy
-        sell_confidence *= sell_accuracy
+        if pd.isna(latest_rsi) or pd.isna(latest_ema20) or pd.isna(latest_ema50) or pd.isna(latest_macd):
+            print(f"Skipping {asset}: NaN indicators")
+            continue
 
-        if buy_confidence > sell_confidence:
+        buy_conf = 0
+        sell_conf = 0
+
+        if latest_rsi < 30:
+            buy_conf += 25
+        if latest_rsi > 70:
+            sell_conf += 25
+
+        if latest_ema20 > latest_ema50:
+            buy_conf += 25
+        else:
+            sell_conf += 25
+
+        if latest_macd > latest_macd_signal:
+            buy_conf += 25
+        else:
+            sell_conf += 25
+
+        buy_conf *= buy_acc
+        sell_conf *= sell_acc
+
+        if buy_conf > sell_conf:
             decision = "BUY"
-            confidence_score = int(buy_confidence)
-        elif sell_confidence > buy_confidence:
+            confidence = int(buy_conf)
+        elif sell_conf > buy_conf:
             decision = "SELL"
-            confidence_score = int(sell_confidence)
+            confidence = int(sell_conf)
         else:
             decision = "HOLD"
-            confidence_score = 0
+            confidence = 0
 
         position = portfolio[asset]
+        price = float(latest["Close"])
 
-        if decision == "BUY":
-            max_risk_amount = available_cash * RISK_PER_TRADE
-            quantity_to_buy = int(max_risk_amount // current_price)
+        # EXECUTE TRADE
+        if decision == "BUY" and confidence >= TRADE_CONFIDENCE_THRESHOLD:
+            risk_amount = available_cash * RISK_PER_TRADE
+            quantity = int(risk_amount // price)
 
-            if quantity_to_buy > 0:
-                total_cost = quantity_to_buy * current_price
-                available_cash -= total_cost
+            if quantity > 0:
+                cost = quantity * price
+                available_cash -= cost
 
-                new_quantity = position["quantity"] + quantity_to_buy
-                new_average_price = (
-                    (position["quantity"] * position["average_price"] + total_cost)
-                    / new_quantity
+                total_qty = position["quantity"] + quantity
+                avg_price = (
+                    (position["quantity"] * position["average_price"] + cost) / total_qty
                 )
 
                 portfolio[asset] = {
-                    "quantity": new_quantity,
-                    "average_price": round(new_average_price, 2)
+                    "quantity": total_qty,
+                    "average_price": round(avg_price, 2)
                 }
 
         elif decision == "SELL" and position["quantity"] > 0:
-            available_cash += position["quantity"] * current_price
+            available_cash += position["quantity"] * price
             portfolio[asset] = {"quantity": 0, "average_price": 0}
 
         trade_log.append({
-            "date": datetime.now(),
+            "date": datetime.now().strftime("%Y-%m-%d %H:%M"),
             "asset": asset,
             "asset_type": "Stock" if asset in STOCKS else "ETF",
             "decision": decision,
-            "confidence": confidence_score
+            "confidence": confidence,
+            "price": round(price, 2)
         })
 
-    except Exception:
-        continue
+        print(asset, decision, confidence)
+
+    except Exception as error:
+        print(f"❌ Error processing {asset}: {error}")
 
 # =========================================================
-# SAVE STATE & REPORTS
+# SAVE STATE
 # =========================================================
 with open(STATE_FILE, "w") as file:
     json.dump({
-        "available_cash": available_cash,
+        "available_cash": round(available_cash, 2),
         "portfolio": portfolio
     }, file, indent=2)
 
-trade_dataframe = pd.DataFrame(trade_log)
+# =========================================================
+# SAVE REPORTS
+# =========================================================
+df_trades = pd.DataFrame(trade_log)
+df_trades.to_csv(DAILY_SIGNALS_FILE, index=False)
 
-if not trade_dataframe.empty and "confidence" in trade_dataframe.columns:
-    trade_dataframe = trade_dataframe.sort_values("confidence", ascending=False)
-
-trade_dataframe.to_csv(DAILY_REPORT_FILE, index=False)
+if os.path.exists(TRADE_HISTORY_FILE):
+    df_trades.to_csv(TRADE_HISTORY_FILE, mode="a", index=False, header=False)
+else:
+    df_trades.to_csv(TRADE_HISTORY_FILE, index=False)
 
 # =========================================================
 # PORTFOLIO PERFORMANCE
 # =========================================================
-portfolio_rows = []
+rows = []
 total_invested = 0
-total_current_value = 0
+total_value = 0
 
-for asset, position in portfolio.items():
-    if position["quantity"] == 0:
+for asset, pos in portfolio.items():
+    if pos["quantity"] == 0:
         continue
 
-    current_price = float(
-        yf.download(asset, period="1d", progress=False).Close.iloc[-1]
-    )
+    price = float(yf.download(asset, period="1d", progress=False)["Close"].iloc[-1])
 
-    invested_value = position["quantity"] * position["average_price"]
-    current_value = position["quantity"] * current_price
-    profit = current_value - invested_value
+    invested = pos["quantity"] * pos["average_price"]
+    current = pos["quantity"] * price
+    profit = current - invested
 
-    total_invested += invested_value
-    total_current_value += current_value
+    total_invested += invested
+    total_value += current
 
-    portfolio_rows.append({
+    rows.append({
         "asset": asset,
         "type": "Stock" if asset in STOCKS else "ETF",
-        "quantity": position["quantity"],
-        "average_price": position["average_price"],
-        "current_price": round(current_price, 2),
-        "invested_value": round(invested_value, 2),
-        "current_value": round(current_value, 2),
+        "quantity": pos["quantity"],
+        "average_price": pos["average_price"],
+        "current_price": round(price, 2),
+        "invested_value": round(invested, 2),
+        "current_value": round(current, 2),
         "profit": round(profit, 2),
-        "return_percent": round((profit / invested_value) * 100, 2)
+        "return_pct": round((profit / invested) * 100, 2)
     })
 
-pd.DataFrame(portfolio_rows).to_csv(PORTFOLIO_DETAIL_FILE, index=False)
+pd.DataFrame(rows).to_csv(PORTFOLIO_DETAILS_FILE, index=False)
 
-portfolio_summary = {
+summary = {
     "available_cash": round(available_cash, 2),
     "total_invested": round(total_invested, 2),
-    "current_invested_value": round(total_current_value, 2),
-    "portfolio_value": round(available_cash + total_current_value, 2),
-    "total_profit": round(
-        available_cash + total_current_value - INITIAL_CAPITAL, 2
-    )
+    "portfolio_value": round(available_cash + total_value, 2),
+    "total_profit": round(available_cash + total_value - INITIAL_CAPITAL, 2)
 }
 
-pd.DataFrame([portfolio_summary]).to_csv(PORTFOLIO_SUMMARY_FILE, index=False)
+pd.DataFrame([summary]).to_csv(PORTFOLIO_SUMMARY_FILE, index=False)
 
-print("✅ Investment bot executed successfully")
+print("✅ Investment bot finished successfully")
