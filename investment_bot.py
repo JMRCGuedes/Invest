@@ -11,12 +11,21 @@ INITIAL_CAPITAL = 10_000
 RISK_PER_TRADE = 0.02
 BACKTEST_LOOKAHEAD_DAYS = 5
 TRADE_CONFIDENCE_THRESHOLD = 30
+BROKER_FEE_PERCENT = 0.001  # 0.1% per trade
 
 STATE_FILE = "state.json"
 TRADE_HISTORY_FILE = "trade_history.csv"
 DAILY_SIGNALS_FILE = "daily_signals.csv"
 PORTFOLIO_DETAILS_FILE = "portfolio_details.csv"
 PORTFOLIO_SUMMARY_FILE = "portfolio_summary.csv"
+
+# =========================================================
+# REVOLUT SETTINGS
+# =========================================================
+BROKER = "REVOLUT"
+ALLOW_FRACTIONAL_STOCKS = True
+ALLOW_FRACTIONAL_ETFS = False
+MIN_STOCK_FRACTION = 0.01
 
 # =========================================================
 # ASSETS
@@ -64,6 +73,7 @@ def run_backtest(df):
         current = df.iloc[i]
         future = df.iloc[i + BACKTEST_LOOKAHEAD_DAYS]
 
+        # Skip if NaN
         if pd.isna(current["RSI"]) or pd.isna(current["EMA20"]) or pd.isna(current["EMA50"]) or pd.isna(current["MACD"]):
             continue
 
@@ -89,7 +99,6 @@ def run_backtest(df):
             buy_total += 1
             if future["Close"] > current["Close"]:
                 buy_wins += 1
-
         elif sell_score > buy_score:
             sell_total += 1
             if future["Close"] < current["Close"]:
@@ -122,12 +131,11 @@ for asset in ALL_ASSETS:
     try:
         df = yf.download(asset, period="6mo", progress=False, auto_adjust=False)
 
-        # 🔥 FIX CRÍTICO: flatten columns if MultiIndex
+        # Fix MultiIndex columns
         if isinstance(df.columns, pd.MultiIndex):
             df.columns = df.columns.get_level_values(0)
 
-
-        if df.empty or len(df) < 60:
+        if df.empty or "Close" not in df.columns or len(df) < 60:
             print(f"Skipping {asset}: insufficient data")
             continue
 
@@ -173,50 +181,68 @@ for asset in ALL_ASSETS:
 
         if buy_conf > sell_conf:
             decision = "BUY"
-            confidence = int(buy_conf)
+            confidence_score = int(buy_conf)
         elif sell_conf > buy_conf:
             decision = "SELL"
-            confidence = int(sell_conf)
+            confidence_score = int(sell_conf)
         else:
             decision = "HOLD"
-            confidence = 0
+            confidence_score = 0
 
         position = portfolio[asset]
-        price = float(latest["Close"])
+        current_price = float(latest["Close"])
 
-        # EXECUTE TRADE
-        if decision == "BUY" and confidence >= TRADE_CONFIDENCE_THRESHOLD:
-            risk_amount = available_cash * RISK_PER_TRADE
-            quantity = int(risk_amount // price)
+        # =====================================================
+        # EXECUTE TRADE (REVOLUT FRACTIONS + FEES)
+        # =====================================================
+        if decision == "BUY" and confidence_score >= TRADE_CONFIDENCE_THRESHOLD:
+            max_risk_amount = available_cash * RISK_PER_TRADE
 
-            if quantity > 0:
-                cost = quantity * price
-                available_cash -= cost
+            is_stock = asset in STOCKS
+            allow_fractional = ALLOW_FRACTIONAL_STOCKS if is_stock else ALLOW_FRACTIONAL_ETFS
 
-                total_qty = position["quantity"] + quantity
-                avg_price = (
-                    (position["quantity"] * position["average_price"] + cost) / total_qty
+            if allow_fractional:
+                quantity_to_buy = max_risk_amount / current_price
+                quantity_to_buy = round(quantity_to_buy, 2)
+                if quantity_to_buy < MIN_STOCK_FRACTION:
+                    quantity_to_buy = 0
+            else:
+                quantity_to_buy = int(max_risk_amount // current_price)
+
+            total_cost = quantity_to_buy * current_price
+            total_cost += total_cost * BROKER_FEE_PERCENT  # apply broker fee
+
+            if quantity_to_buy > 0 and total_cost <= available_cash:
+                available_cash -= total_cost
+                new_quantity = position["quantity"] + quantity_to_buy
+                new_average_price = (
+                    (position["quantity"] * position["average_price"] + total_cost)
+                    / new_quantity
                 )
-
                 portfolio[asset] = {
-                    "quantity": total_qty,
-                    "average_price": round(avg_price, 2)
+                    "quantity": round(new_quantity, 4),
+                    "average_price": round(new_average_price, 2)
                 }
 
         elif decision == "SELL" and position["quantity"] > 0:
-            available_cash += position["quantity"] * price
+            total_value = position["quantity"] * current_price
+            total_value -= total_value * BROKER_FEE_PERCENT  # apply fee
+            available_cash += total_value
             portfolio[asset] = {"quantity": 0, "average_price": 0}
 
+        # =====================================================
+        # LOG TRADE
+        # =====================================================
         trade_log.append({
             "date": datetime.now().strftime("%Y-%m-%d %H:%M"),
             "asset": asset,
             "asset_type": "Stock" if asset in STOCKS else "ETF",
             "decision": decision,
-            "confidence": confidence,
-            "price": round(price, 2)
+            "confidence": confidence_score,
+            "price": round(current_price, 2)
         })
 
-        print(asset, decision, confidence)
+        print(asset, decision, confidence_score)
 
     except Exception as error:
         print(f"❌ Error processing {asset}: {error}")
@@ -244,44 +270,43 @@ else:
 # =========================================================
 # PORTFOLIO PERFORMANCE
 # =========================================================
-rows = []
+portfolio_rows = []
 total_invested = 0
-total_value = 0
+total_current_value = 0
 
 for asset, pos in portfolio.items():
     if pos["quantity"] == 0:
         continue
 
     price = float(yf.download(asset, period="1d", progress=False)["Close"].iloc[-1])
+    invested_value = pos["quantity"] * pos["average_price"]
+    current_value = pos["quantity"] * price
+    profit = current_value - invested_value
 
-    invested = pos["quantity"] * pos["average_price"]
-    current = pos["quantity"] * price
-    profit = current - invested
+    total_invested += invested_value
+    total_current_value += current_value
 
-    total_invested += invested
-    total_value += current
-
-    rows.append({
+    portfolio_rows.append({
         "asset": asset,
         "type": "Stock" if asset in STOCKS else "ETF",
         "quantity": pos["quantity"],
         "average_price": pos["average_price"],
         "current_price": round(price, 2),
-        "invested_value": round(invested, 2),
-        "current_value": round(current, 2),
+        "invested_value": round(invested_value, 2),
+        "current_value": round(current_value, 2),
         "profit": round(profit, 2),
-        "return_pct": round((profit / invested) * 100, 2)
+        "return_pct": round((profit / invested_value) * 100, 2)
     })
 
-pd.DataFrame(rows).to_csv(PORTFOLIO_DETAILS_FILE, index=False)
+pd.DataFrame(portfolio_rows).to_csv(PORTFOLIO_DETAILS_FILE, index=False)
 
 summary = {
     "available_cash": round(available_cash, 2),
     "total_invested": round(total_invested, 2),
-    "portfolio_value": round(available_cash + total_value, 2),
-    "total_profit": round(available_cash + total_value - INITIAL_CAPITAL, 2)
+    "portfolio_value": round(available_cash + total_current_value, 2),
+    "total_profit": round(available_cash + total_current_value - INITIAL_CAPITAL, 2)
 }
 
 pd.DataFrame([summary]).to_csv(PORTFOLIO_SUMMARY_FILE, index=False)
 
-print("✅ Investment bot finished successfully")
+print("✅ Revolut Investment Bot finished successfully")
