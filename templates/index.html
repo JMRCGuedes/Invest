@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Portfolio Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">📈 Investment Portfolio</div>
+            <div class="nav-links">
+                <a href="/" class="nav-link active">Dashboard</a>
+                <a href="/details" class="nav-link">Details</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>Portfolio Overview</h1>
+            <p class="subtitle">Real-time tracking and performance analytics</p>
+        </header>
+
+        <!-- Portfolio Summary Cards -->
+        <div class="summary-grid">
+            <div class="card summary-card">
+                <div class="card-header">
+                    <span class="card-icon">💵</span>
+                    <span class="card-title">Available Cash</span>
+                </div>
+                <div class="card-value" id="available-cash">$0.00</div>
+            </div>
+            <div class="card summary-card">
+                <div class="card-header">
+                    <span class="card-icon">💼</span>
+                    <span class="card-title">Total Invested</span>
+                </div>
+                <div class="card-value" id="total-invested">$0.00</div>
+            </div>
+            <div class="card summary-card">
+                <div class="card-header">
+                    <span class="card-icon">📊</span>
+                    <span class="card-title">Portfolio Value</span>
+                </div>
+                <div class="card-value" id="portfolio-value">$0.00</div>
+            </div>
+            <div class="card summary-card">
+                <div class="card-header">
+                    <span class="card-icon">💰</span>
+                    <span class="card-title">Total Profit/Loss</span>
+                </div>
+                <div class="card-value" id="total-profit">$0.00</div>
+                <div class="card-percentage" id="profit-percentage">0.00%</div>
+            </div>
+        </div>
+
+        <!-- Asset Allocation Chart -->
+        <div class="card">
+            <h2>Asset Allocation</h2>
+            <div id="allocation-chart" class="allocation-chart">
+                <div class="loading">Loading allocation...</div>
+            </div>
+        </div>
+
+        <!-- Asset Performance Chart -->
+        <div class="card">
+            <div class="chart-header-controls">
+                <h2>Asset Trading Performance</h2>
+                <div class="asset-selector">
+                    <label for="performance-asset-select">Select Asset:</label>
+                    <select id="performance-asset-select">
+                        <option value="">Loading...</option>
+                    </select>
+                </div>
+            </div>
+            <div id="performance-chart" class="performance-chart">
+                <div class="loading">Select an asset to view performance...</div>
+            </div>
+        </div>
+
+        <!-- Current Holdings -->
+        <div class="card">
+            <h2>Current Holdings</h2>
+            <div class="holdings-list" id="holdings-list">
+                <div class="loading">Loading holdings...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>

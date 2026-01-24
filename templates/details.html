@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">📈 Investment Portfolio</div>
+            <div class="nav-links">
+                <a href="/" class="nav-link">Dashboard</a>
+                <a href="/details" class="nav-link active">Details</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>Portfolio Details</h1>
+            <p class="subtitle">Detailed holdings and trading history</p>
+        </header>
+
+        <!-- Current Holdings -->
+        <div class="card">
+            <h2>Current Holdings</h2>
+            <div class="table-container">
+                <table id="portfolio-table">
+                    <thead>
+                        <tr>
+                            <th>Asset</th>
+                            <th>Type</th>
+                            <th>Quantity</th>
+                            <th>Avg Price</th>
+                            <th>Current Price</th>
+                            <th>Invested Value</th>
+                            <th>Current Value</th>
+                            <th>Profit/Loss</th>
+                            <th>Return %</th>
+                        </tr>
+                    </thead>
+                    <tbody id="portfolio-body">
+                        <tr>
+                            <td colspan="9" class="loading">Loading portfolio data...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Latest Signals -->
+        <div class="card">
+            <h2>Latest Trading Signals</h2>
+            <div class="table-container">
+                <table id="signals-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Asset</th>
+                            <th>Type</th>
+                            <th>Decision</th>
+                            <th>Confidence</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="signals-body">
+                        <tr>
+                            <td colspan="6" class="loading">Loading signals data...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Trade History -->
+        <div class="card">
+            <h2>Recent Trade History (Last 100)</h2>
+            <div class="table-container">
+                <table id="history-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Asset</th>
+                            <th>Type</th>
+                            <th>Decision</th>
+                            <th>Confidence</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-body">
+                        <tr>
+                            <td colspan="6" class="loading">Loading trade history...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='details.js') }}"></script>
+</body>
+</html>
