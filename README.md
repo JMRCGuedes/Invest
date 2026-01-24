@@ -1,3 +1,7 @@
+Author: João Guedes
+AI used: CHATGPT, Cursor AI
+Access website: https://invest-7x22.onrender.com/
+
 📈 AI Investment Bot — Documentation
 Overview
 
