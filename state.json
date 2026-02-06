@@ -1,5 +1,5 @@
 {
-  "available_cash": 55.04,
+  "available_cash": 51.31,
   "portfolio": {
     "AAPL": {
       "quantity": 0,
@@ -86,7 +86,7 @@
       "average_price": 0
     },
     "KO": {
-      "quantity": 0.02,
+      "quantity": 0.03,
       "average_price": 79.11
     },
     "MCD": {
@@ -114,8 +114,8 @@
       "average_price": 380.39
     },
     "BAC": {
-      "quantity": 3.3,
-      "average_price": 55.09
+      "quantity": 3.32,
+      "average_price": 55.1
     },
     "JPM": {
       "quantity": 0,
@@ -126,8 +126,8 @@
       "average_price": 0
     },
     "CVX": {
-      "quantity": 1.0,
-      "average_price": 178.99
+      "quantity": 1.01,
+      "average_price": 179.01
     },
     "XOM": {
       "quantity": 0,
