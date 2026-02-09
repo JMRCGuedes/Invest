@@ -1,5 +1,5 @@
 {
-  "available_cash": 13.68,
+  "available_cash": 1472.86,
   "portfolio": {
     "AAPL": {
       "quantity": 0,
@@ -142,8 +142,8 @@
       "average_price": 582.67
     },
     "BLK": {
-      "quantity": 1.37,
-      "average_price": 1151.01
+      "quantity": 0,
+      "average_price": 0
     },
     "SPGI": {
       "quantity": 0,
