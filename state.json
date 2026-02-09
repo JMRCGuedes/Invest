@@ -1,5 +1,5 @@
 {
-  "available_cash": 1472.86,
+  "available_cash": 2998.09,
   "portfolio": {
     "AAPL": {
       "quantity": 0,
@@ -70,24 +70,24 @@
       "average_price": 0
     },
     "TXN": {
-      "quantity": 1.64,
-      "average_price": 208.64
+      "quantity": 1.77,
+      "average_price": 209.55
     },
     "AMGN": {
       "quantity": 0,
       "average_price": 0
     },
     "HON": {
-      "quantity": 8.69,
-      "average_price": 220.3
+      "quantity": 8.81,
+      "average_price": 220.58
     },
     "PEP": {
       "quantity": 0,
       "average_price": 0
     },
     "KO": {
-      "quantity": 0.23,
-      "average_price": 79.11
+      "quantity": 0.59,
+      "average_price": 78.37
     },
     "MCD": {
       "quantity": 0,
@@ -98,12 +98,12 @@
       "average_price": 0
     },
     "CAT": {
-      "quantity": 0,
-      "average_price": 0
+      "quantity": 0.04,
+      "average_price": 736.03
     },
     "JNJ": {
-      "quantity": 8.52,
-      "average_price": 220.14
+      "quantity": 8.63,
+      "average_price": 220.36
     },
     "V": {
       "quantity": 0,
@@ -114,8 +114,8 @@
       "average_price": 380.39
     },
     "BAC": {
-      "quantity": 3.64,
-      "average_price": 55.13
+      "quantity": 4.11,
+      "average_price": 55.29
     },
     "JPM": {
       "quantity": 0,
@@ -126,20 +126,20 @@
       "average_price": 0
     },
     "CVX": {
-      "quantity": 1.03,
-      "average_price": 179.05
+      "quantity": 1.17,
+      "average_price": 179.45
     },
     "XOM": {
-      "quantity": 0,
-      "average_price": 0
+      "quantity": 0.17,
+      "average_price": 150.19
     },
     "NFLX": {
       "quantity": 0,
       "average_price": 0
     },
     "LMT": {
-      "quantity": 2.79,
-      "average_price": 582.67
+      "quantity": 0,
+      "average_price": 0
     },
     "BLK": {
       "quantity": 0,
@@ -218,8 +218,8 @@
       "average_price": 0
     },
     "SCHD": {
-      "quantity": 0,
-      "average_price": 0
+      "quantity": 1,
+      "average_price": 31.35
     },
     "XLK": {
       "quantity": 0,
