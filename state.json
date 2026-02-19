@@ -1,5 +1,5 @@
 {
-  "available_cash": 1921.27,
+  "available_cash": 1813.89,
   "portfolio": {
     "AAPL": {
       "quantity": 0,
@@ -86,8 +86,8 @@
       "average_price": 0
     },
     "KO": {
-      "quantity": 13.01,
-      "average_price": 78.75
+      "quantity": 13.5,
+      "average_price": 78.76
     },
     "MCD": {
       "quantity": 0,
@@ -102,8 +102,8 @@
       "average_price": 750.13
     },
     "JNJ": {
-      "quantity": 12.43,
-      "average_price": 227.28
+      "quantity": 12.58,
+      "average_price": 227.52
     },
     "V": {
       "quantity": 0,
@@ -218,8 +218,8 @@
       "average_price": 0
     },
     "SCHD": {
-      "quantity": 11,
-      "average_price": 31.5
+      "quantity": 12,
+      "average_price": 31.51
     },
     "XLK": {
       "quantity": 0,
