@@ -1,5 +1,5 @@
 {
-  "available_cash": 2555.88,
+  "available_cash": 2321.88,
   "portfolio": {
     "AAPL": {
       "quantity": 0,
@@ -86,8 +86,8 @@
       "average_price": 0
     },
     "KO": {
-      "quantity": 11.24,
-      "average_price": 78.71
+      "quantity": 11.89,
+      "average_price": 78.73
     },
     "MCD": {
       "quantity": 0,
@@ -98,12 +98,12 @@
       "average_price": 0
     },
     "CAT": {
-      "quantity": 1.1,
-      "average_price": 748.93
+      "quantity": 1.17,
+      "average_price": 749.46
     },
     "JNJ": {
-      "quantity": 11.89,
-      "average_price": 226.42
+      "quantity": 12.09,
+      "average_price": 226.74
     },
     "V": {
       "quantity": 0,
@@ -154,8 +154,8 @@
       "average_price": 0
     },
     "RTX": {
-      "quantity": 0.84,
-      "average_price": 205.54
+      "quantity": 1.08,
+      "average_price": 205.1
     },
     "SPY": {
       "quantity": 0,
@@ -218,8 +218,8 @@
       "average_price": 0
     },
     "SCHD": {
-      "quantity": 8,
-      "average_price": 31.48
+      "quantity": 9,
+      "average_price": 31.49
     },
     "XLK": {
       "quantity": 0,
