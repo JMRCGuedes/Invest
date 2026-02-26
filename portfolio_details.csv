@@ -1,6 +1,6 @@
 asset,type,quantity,average_price,current_price,invested_value,current_value,profit,return_pct
 TXN,Stock,3.5,214.33,213.9,750.16,748.65,-1.51,-0.2
-KO,Stock,29.35,79.19,80.47,2324.23,2361.79,37.57,1.62
+KO,Stock,29.47,79.2,80.47,2334.02,2371.45,37.43,1.6
 CAT,Stock,1.28,750.13,766.61,960.17,981.26,21.09,2.2
 JNJ,Stock,16.69,231.72,245.17,3867.41,4091.89,224.48,5.8
 CVX,Stock,3.05,181.4,184.22,553.27,561.87,8.6,1.55
