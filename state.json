@@ -1,5 +1,5 @@
 {
-  "available_cash": 6067.43,
+  "available_cash": 5798.64,
   "portfolio": {
     "AAPL": {
       "quantity": 0,
@@ -86,8 +86,8 @@
       "average_price": 0
     },
     "KO": {
-      "quantity": 5.28,
-      "average_price": 81.58
+      "quantity": 6.77,
+      "average_price": 81.59
     },
     "MCD": {
       "quantity": 0.58,
@@ -182,7 +182,7 @@
       "average_price": 0
     },
     "VEA": {
-      "quantity": 2,
+      "quantity": 3,
       "average_price": 70.31
     },
     "VTV": {
@@ -198,8 +198,8 @@
       "average_price": 0
     },
     "IEMG": {
-      "quantity": 2,
-      "average_price": 76.82
+      "quantity": 3,
+      "average_price": 76.83
     },
     "IJH": {
       "quantity": 0,
