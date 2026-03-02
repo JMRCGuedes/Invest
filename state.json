@@ -1,5 +1,5 @@
 {
-  "available_cash": 1290.36,
+  "available_cash": 1238.17,
   "portfolio": {
     "AAPL": {
       "quantity": 0,
@@ -90,8 +90,8 @@
       "average_price": 81.61
     },
     "MCD": {
-      "quantity": 0.91,
-      "average_price": 336.35
+      "quantity": 0.99,
+      "average_price": 336.33
     },
     "WMT": {
       "quantity": 0,
@@ -154,8 +154,8 @@
       "average_price": 0
     },
     "RTX": {
-      "quantity": 1.74,
-      "average_price": 205.87
+      "quantity": 1.86,
+      "average_price": 206.19
     },
     "SPY": {
       "quantity": 0,
