@@ -1,5 +1,5 @@
 {
-  "available_cash": 212.11,
+  "available_cash": 207.98,
   "portfolio": {
     "AAPL": {
       "quantity": 0,
@@ -154,8 +154,8 @@
       "average_price": 0
     },
     "RTX": {
-      "quantity": 6.6,
-      "average_price": 208.42
+      "quantity": 6.62,
+      "average_price": 208.41
     },
     "SPY": {
       "quantity": 0,
