@@ -1,5 +1,5 @@
 asset,type,quantity,average_price,current_price,invested_value,current_value,profit,return_pct
-INTC,Stock,0.16,48.09,47.98,7.69,7.68,-0.02,-0.23
+INTC,Stock,0.18,48.08,47.98,8.65,8.64,-0.02,-0.21
 TXN,Stock,3.5,214.33,198.67,750.16,695.34,-54.81,-7.31
 KO,Stock,43.81,81.61,77.63,3575.33,3400.97,-174.36,-4.88
 MCD,Stock,2.82,335.05,325.21,944.84,917.09,-27.75,-2.94
