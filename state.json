@@ -1,5 +1,5 @@
 {
-  "available_cash": 30.58,
+  "available_cash": 30.13,
   "portfolio": {
     "AAPL": {
       "quantity": 0,
@@ -42,8 +42,8 @@
       "average_price": 0
     },
     "INTC": {
-      "quantity": 0.42,
-      "average_price": 47.74
+      "quantity": 0.43,
+      "average_price": 47.69
     },
     "CSCO": {
       "quantity": 0,
