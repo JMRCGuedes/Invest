@@ -1,5 +1,5 @@
 {
-  "available_cash": 369.62,
+  "available_cash": 354.42,
   "portfolio": {
     "AAPL": {
       "quantity": 0,
@@ -42,8 +42,8 @@
       "average_price": 0
     },
     "INTC": {
-      "quantity": 3.9,
-      "average_price": 45.64
+      "quantity": 4.06,
+      "average_price": 45.66
     },
     "CSCO": {
       "quantity": 0,
@@ -126,8 +126,8 @@
       "average_price": 0
     },
     "CVX": {
-      "quantity": 0.85,
-      "average_price": 197.1
+      "quantity": 0.89,
+      "average_price": 197.04
     },
     "XOM": {
       "quantity": 2.41,
