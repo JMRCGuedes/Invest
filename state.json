@@ -1,5 +1,5 @@
 {
-  "available_cash": 843.23,
+  "available_cash": 791.91,
   "portfolio": {
     "AAPL": {
       "quantity": 0,
@@ -62,16 +62,16 @@
       "average_price": 0
     },
     "ORCL": {
-      "quantity": 0,
-      "average_price": 0
+      "quantity": 0.1,
+      "average_price": 176.46
     },
     "IBM": {
       "quantity": 0,
       "average_price": 0
     },
     "TXN": {
-      "quantity": 5.35,
-      "average_price": 235.37
+      "quantity": 5.41,
+      "average_price": 235.89
     },
     "AMGN": {
       "quantity": 0,
@@ -98,8 +98,8 @@
       "average_price": 0
     },
     "CAT": {
-      "quantity": 0.61,
-      "average_price": 807.65
+      "quantity": 0.63,
+      "average_price": 808.56
     },
     "JNJ": {
       "quantity": 5.58,
