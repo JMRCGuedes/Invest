@@ -1,5 +1,5 @@
 {
-  "available_cash": 97.75,
+  "available_cash": 93.33,
   "portfolio": {
     "AAPL": {
       "quantity": 0,
@@ -62,7 +62,7 @@
       "average_price": 0
     },
     "ORCL": {
-      "quantity": 3.9,
+      "quantity": 3.91,
       "average_price": 173.88
     },
     "IBM": {
@@ -70,8 +70,8 @@
       "average_price": 0
     },
     "TXN": {
-      "quantity": 7.74,
-      "average_price": 248.64
+      "quantity": 7.75,
+      "average_price": 248.67
     },
     "AMGN": {
       "quantity": 0,
