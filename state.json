@@ -1,5 +1,5 @@
 {
-  "available_cash": 51.73,
+  "available_cash": 49.22,
   "portfolio": {
     "AAPL": {
       "quantity": 0,
@@ -42,8 +42,8 @@
       "average_price": 0
     },
     "INTC": {
-      "quantity": 0.16,
-      "average_price": 84.88
+      "quantity": 0.17,
+      "average_price": 84.79
     },
     "CSCO": {
       "quantity": 0,
@@ -62,8 +62,8 @@
       "average_price": 0
     },
     "ORCL": {
-      "quantity": 4.01,
-      "average_price": 173.86
+      "quantity": 4.02,
+      "average_price": 173.84
     },
     "IBM": {
       "quantity": 0,
