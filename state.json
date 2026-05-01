@@ -1,5 +1,5 @@
 {
-  "available_cash": 81.82,
+  "available_cash": 70.06,
   "portfolio": {
     "AAPL": {
       "quantity": 0,
@@ -10,8 +10,8 @@
       "average_price": 0
     },
     "NVDA": {
-      "quantity": 0.2,
-      "average_price": 205.15
+      "quantity": 0.21,
+      "average_price": 204.89
     },
     "AMZN": {
       "quantity": 0,
@@ -42,8 +42,8 @@
       "average_price": 0
     },
     "INTC": {
-      "quantity": 1.54,
-      "average_price": 92.76
+      "quantity": 1.56,
+      "average_price": 92.78
     },
     "CSCO": {
       "quantity": 0,
@@ -70,8 +70,8 @@
       "average_price": 0
     },
     "TXN": {
-      "quantity": 8.29,
-      "average_price": 250.23
+      "quantity": 8.3,
+      "average_price": 250.27
     },
     "AMGN": {
       "quantity": 0,
@@ -86,7 +86,7 @@
       "average_price": 0
     },
     "KO": {
-      "quantity": 0.77,
+      "quantity": 0.79,
       "average_price": 78.79
     },
     "MCD": {
@@ -126,12 +126,12 @@
       "average_price": 369.22
     },
     "CVX": {
-      "quantity": 15.8,
-      "average_price": 203.0
+      "quantity": 15.81,
+      "average_price": 202.99
     },
     "XOM": {
-      "quantity": 10.07,
-      "average_price": 162.89
+      "quantity": 10.08,
+      "average_price": 162.88
     },
     "NFLX": {
       "quantity": 0,
