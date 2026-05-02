@@ -1,5 +1,5 @@
 {
-  "available_cash": 23.89,
+  "available_cash": 23.1,
   "portfolio": {
     "AAPL": {
       "quantity": 0,
@@ -86,7 +86,7 @@
       "average_price": 0
     },
     "KO": {
-      "quantity": 0.96,
+      "quantity": 0.97,
       "average_price": 78.8
     },
     "MCD": {
