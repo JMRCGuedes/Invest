@@ -1,5 +1,5 @@
 {
-  "available_cash": 19.15,
+  "available_cash": 61.14,
   "portfolio": {
     "AAPL": {
       "quantity": 0,
@@ -10,8 +10,8 @@
       "average_price": 0
     },
     "NVDA": {
-      "quantity": 0.23,
-      "average_price": 204.45
+      "quantity": 0,
+      "average_price": 0
     },
     "AMZN": {
       "quantity": 0,
@@ -86,7 +86,7 @@
       "average_price": 0
     },
     "KO": {
-      "quantity": 1.02,
+      "quantity": 1.04,
       "average_price": 78.8
     },
     "MCD": {
@@ -126,8 +126,8 @@
       "average_price": 369.22
     },
     "CVX": {
-      "quantity": 15.84,
-      "average_price": 202.96
+      "quantity": 15.85,
+      "average_price": 202.95
     },
     "XOM": {
       "quantity": 10.14,
