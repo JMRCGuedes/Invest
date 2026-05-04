@@ -1,5 +1,5 @@
 {
-  "available_cash": 46.46,
+  "available_cash": 43.18,
   "portfolio": {
     "AAPL": {
       "quantity": 0,
@@ -42,8 +42,8 @@
       "average_price": 0
     },
     "INTC": {
-      "quantity": 1.72,
-      "average_price": 93.31
+      "quantity": 1.73,
+      "average_price": 93.32
     },
     "CSCO": {
       "quantity": 0,
@@ -86,7 +86,7 @@
       "average_price": 0
     },
     "KO": {
-      "quantity": 1.09,
+      "quantity": 1.1,
       "average_price": 78.78
     },
     "MCD": {
@@ -130,8 +130,8 @@
       "average_price": 202.92
     },
     "XOM": {
-      "quantity": 10.16,
-      "average_price": 162.8
+      "quantity": 10.17,
+      "average_price": 162.79
     },
     "NFLX": {
       "quantity": 0,
