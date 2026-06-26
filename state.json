@@ -1,5 +1,5 @@
 {
-  "available_cash": 52.83,
+  "available_cash": 7753.1,
   "portfolio": {
     "AAPL": {
       "quantity": 0,
@@ -42,12 +42,12 @@
       "average_price": 0
     },
     "INTC": {
-      "quantity": 0,
-      "average_price": 0
+      "quantity": 0.01,
+      "average_price": 128.45
     },
     "CSCO": {
-      "quantity": 0,
-      "average_price": 0
+      "quantity": 0.01,
+      "average_price": 113.88
     },
     "QCOM": {
       "quantity": 0,
@@ -70,16 +70,16 @@
       "average_price": 0
     },
     "TXN": {
-      "quantity": 0.85,
-      "average_price": 194.65
+      "quantity": 0,
+      "average_price": 0
     },
     "AMGN": {
       "quantity": 0,
       "average_price": 0
     },
     "HON": {
-      "quantity": 7.93,
-      "average_price": 218.9
+      "quantity": 7.96,
+      "average_price": 218.95
     },
     "PEP": {
       "quantity": 0,
@@ -98,20 +98,20 @@
       "average_price": 0
     },
     "CAT": {
-      "quantity": 0,
-      "average_price": 0
+      "quantity": 0.01,
+      "average_price": 998.47
     },
     "JNJ": {
-      "quantity": 7.81,
-      "average_price": 218.54
+      "quantity": 0,
+      "average_price": 0
     },
     "V": {
       "quantity": 0,
       "average_price": 0
     },
     "HD": {
-      "quantity": 4.37,
-      "average_price": 380.39
+      "quantity": 0,
+      "average_price": 0
     },
     "BAC": {
       "quantity": 0,
@@ -138,16 +138,16 @@
       "average_price": 0
     },
     "LMT": {
-      "quantity": 2.79,
-      "average_price": 582.67
+      "quantity": 0,
+      "average_price": 0
     },
     "BLK": {
-      "quantity": 1.37,
-      "average_price": 1151.01
+      "quantity": 0,
+      "average_price": 0
     },
     "SPGI": {
-      "quantity": 1.94,
-      "average_price": 546.9
+      "quantity": 0,
+      "average_price": 0
     },
     "MS": {
       "quantity": 0,
@@ -206,8 +206,8 @@
       "average_price": 0
     },
     "IJR": {
-      "quantity": 3,
-      "average_price": 128.7
+      "quantity": 0,
+      "average_price": 0
     },
     "VIG": {
       "quantity": 0,
