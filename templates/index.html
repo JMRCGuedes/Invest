@@ -13,6 +13,11 @@
             <div class="nav-links">
                 <a href="/" class="nav-link active">Dashboard</a>
                 <a href="/details" class="nav-link">Details</a>
+                <a href="/notifications" class="nav-link">🔔 Notifications</a>
+                <div class="nav-user">
+                    <span class="nav-username">{{ username }}</span>
+                    <a href="/logout" class="nav-logout">Sign out</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -64,6 +69,14 @@
             </div>
         </div>
 
+        <!-- Holdings P&L Chart -->
+        <div class="card">
+            <h2>Holdings Return %</h2>
+            <div id="pnl-chart" class="pnl-chart">
+                <div class="loading">Loading P&amp;L...</div>
+            </div>
+        </div>
+
         <!-- Asset Performance Chart -->
         <div class="card">
             <div class="chart-header-controls">
@@ -77,6 +90,20 @@
             </div>
             <div id="performance-chart" class="performance-chart">
                 <div class="loading">Select an asset to view performance...</div>
+            </div>
+        </div>
+
+        <!-- Signal Sentiment Chart -->
+        <div class="card">
+            <h2>Daily Signal Sentiment</h2>
+            <p class="subtitle" style="margin-bottom:16px;font-size:0.85rem;">BUY / HOLD / SELL ratio per day (last 14 days)</p>
+            <div id="sentiment-chart" class="sentiment-chart">
+                <div class="loading">Loading sentiment...</div>
+            </div>
+            <div class="sentiment-legend">
+                <span class="legend-item"><span class="legend-dot dot-buy"></span>BUY</span>
+                <span class="legend-item"><span class="legend-dot dot-hold"></span>HOLD</span>
+                <span class="legend-item"><span class="legend-dot dot-sell"></span>SELL</span>
             </div>
         </div>
 

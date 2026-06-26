@@ -12,6 +12,8 @@ RISK_PER_TRADE = 0.02
 BACKTEST_LOOKAHEAD_DAYS = 5
 TRADE_CONFIDENCE_THRESHOLD = 30
 BROKER_FEE_PERCENT = 0.001  # 0.1% per trade
+STOP_LOSS_PCT = -0.05   # force sell if position loses 5%
+TAKE_PROFIT_PCT = 0.10  # force sell if position gains 10%
 
 STATE_FILE = "state.json"
 TRADE_HISTORY_FILE = "trade_history.csv"
@@ -62,6 +64,11 @@ def macd_indicator(series):
     macd_line = exponential_moving_average(series, 12) - exponential_moving_average(series, 26)
     signal_line = exponential_moving_average(macd_line, 9)
     return macd_line, signal_line
+
+def bollinger_bands(series, period=20, num_std=2):
+    sma = series.rolling(window=period).mean()
+    std = series.rolling(window=period).std()
+    return sma + num_std * std, sma - num_std * std
 
 # =========================================================
 # BACKTESTING
@@ -143,6 +150,7 @@ for asset in ALL_ASSETS:
         df["EMA50"] = exponential_moving_average(df["Close"], 50)
         df["RSI"] = relative_strength_index(df["Close"])
         df["MACD"], df["MACD_SIGNAL"] = macd_indicator(df["Close"])
+        df["BB_UPPER"], df["BB_LOWER"] = bollinger_bands(df["Close"])
 
         buy_acc, sell_acc = run_backtest(df)
 
@@ -153,10 +161,15 @@ for asset in ALL_ASSETS:
         latest_ema50 = latest["EMA50"]
         latest_macd = latest["MACD"]
         latest_macd_signal = latest["MACD_SIGNAL"]
+        latest_bb_upper = latest["BB_UPPER"]
+        latest_bb_lower = latest["BB_LOWER"]
 
         if pd.isna(latest_rsi) or pd.isna(latest_ema20) or pd.isna(latest_ema50) or pd.isna(latest_macd):
             print(f"Skipping {asset}: NaN indicators")
             continue
+
+        position = portfolio[asset]
+        current_price = float(latest["Close"])
 
         buy_conf = 0
         sell_conf = 0
@@ -176,6 +189,12 @@ for asset in ALL_ASSETS:
         else:
             sell_conf += 25
 
+        if not pd.isna(latest_bb_upper) and not pd.isna(latest_bb_lower):
+            if current_price < latest_bb_lower:
+                buy_conf += 25
+            elif current_price > latest_bb_upper:
+                sell_conf += 25
+
         buy_conf *= buy_acc
         sell_conf *= sell_acc
 
@@ -189,8 +208,17 @@ for asset in ALL_ASSETS:
             decision = "HOLD"
             confidence_score = 0
 
-        position = portfolio[asset]
-        current_price = float(latest["Close"])
+        # =====================================================
+        # STOP LOSS / TAKE PROFIT OVERRIDE
+        # =====================================================
+        if position["quantity"] > 0 and position["average_price"] > 0:
+            position_return = (current_price - position["average_price"]) / position["average_price"]
+            if position_return <= STOP_LOSS_PCT:
+                decision = "SELL"
+                confidence_score = 100
+            elif position_return >= TAKE_PROFIT_PCT:
+                decision = "SELL"
+                confidence_score = 100
 
         # =====================================================
         # EXECUTE TRADE (REVOLUT FRACTIONS + FEES)

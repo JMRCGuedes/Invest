@@ -13,6 +13,11 @@
             <div class="nav-links">
                 <a href="/" class="nav-link">Dashboard</a>
                 <a href="/details" class="nav-link active">Details</a>
+                <a href="/notifications" class="nav-link">🔔 Notifications</a>
+                <div class="nav-user">
+                    <span class="nav-username">{{ username }}</span>
+                    <a href="/logout" class="nav-logout">Sign out</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -22,6 +27,44 @@
             <h1>Portfolio Details</h1>
             <p class="subtitle">Detailed holdings and trading history</p>
         </header>
+
+        <!-- Asset Statistics -->
+        <div class="stats-grid">
+            <div class="card">
+                <h2>Longest Held Assets</h2>
+                <div class="table-container">
+                    <table id="hold-time-table">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Asset</th>
+                                <th>Total Days Held</th>
+                            </tr>
+                        </thead>
+                        <tbody id="hold-time-body">
+                            <tr><td colspan="3" class="loading">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card">
+                <h2>Most Profitable Assets</h2>
+                <div class="table-container">
+                    <table id="profitability-table">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Asset</th>
+                                <th>Realized Return %</th>
+                            </tr>
+                        </thead>
+                        <tbody id="profitability-body">
+                            <tr><td colspan="3" class="loading">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
         <!-- Current Holdings -->
         <div class="card">

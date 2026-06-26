@@ -97,6 +97,42 @@ async function loadTradeHistory() {
     }
 }
 
+// Fetch and display longest held and most profitable assets
+async function loadAssetStats() {
+    try {
+        const response = await fetch('/api/asset-stats');
+        const data = await response.json();
+
+        const holdBody = document.getElementById('hold-time-body');
+        if (!data.hold_time || data.hold_time.length === 0) {
+            holdBody.innerHTML = '<tr><td colspan="3" class="loading">No closed positions yet</td></tr>';
+        } else {
+            holdBody.innerHTML = data.hold_time.map((item, i) => `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td><strong>${item.asset}</strong></td>
+                    <td>${item.days_held} day${item.days_held !== 1 ? 's' : ''}</td>
+                </tr>
+            `).join('');
+        }
+
+        const profBody = document.getElementById('profitability-body');
+        if (!data.profitability || data.profitability.length === 0) {
+            profBody.innerHTML = '<tr><td colspan="3" class="loading">No closed positions yet</td></tr>';
+        } else {
+            profBody.innerHTML = data.profitability.map((item, i) => `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td><strong>${item.asset}</strong></td>
+                    <td class="${item.total_return_pct >= 0 ? 'positive' : 'negative'}">${item.total_return_pct.toFixed(2)}%</td>
+                </tr>
+            `).join('');
+        }
+    } catch (error) {
+        console.error('Error loading asset stats:', error);
+    }
+}
+
 // Utility function to format currency
 function formatCurrency(value) {
     return new Intl.NumberFormat('en-US', {
@@ -112,4 +148,5 @@ document.addEventListener('DOMContentLoaded', function() {
     loadPortfolio();
     loadSignals();
     loadTradeHistory();
+    loadAssetStats();
 });

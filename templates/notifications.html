@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications — Investment Portfolio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">📈 Investment Portfolio</div>
+            <div class="nav-links">
+                <a href="/" class="nav-link">Dashboard</a>
+                <a href="/details" class="nav-link">Details</a>
+                <a href="/notifications" class="nav-link active">🔔 Notifications</a>
+                <div class="nav-user">
+                    <span class="nav-username">{{ username }}</span>
+                    <a href="/logout" class="nav-logout">Sign out</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>🔔 Notifications</h1>
+            <p class="subtitle">Latest bot actions and daily report download</p>
+        </header>
+
+        <!-- Report download card -->
+        <div class="card">
+            <div class="notif-header">
+                <div>
+                    <h2>Daily Report</h2>
+                    <p style="color:#64748b;font-size:0.9rem;margin-top:4px;">
+                        PDF with portfolio summary, today's actions and current holdings.
+                    </p>
+                </div>
+                <a href="/report/download" class="download-btn">⬇ Download PDF</a>
+            </div>
+        </div>
+
+        <!-- Signal counts card -->
+        <div class="card">
+            <h2>Last Run — Signal Summary</h2>
+            <div id="signal-summary" class="signal-summary-grid">
+                <div class="loading">Loading...</div>
+            </div>
+        </div>
+
+        <!-- Actions list -->
+        <div class="card">
+            <h2>Actions Taken</h2>
+            <div id="notifications-list" class="notif-list">
+                <div class="loading">Loading notifications...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='notifications.js') }}"></script>
+</body>
+</html>

@@ -1,4 +1,5 @@
 flask==3.0.0
 pandas==2.1.4
 yfinance==0.2.33
+fpdf2==2.7.9
 gunicorn

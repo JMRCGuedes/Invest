@@ -57,6 +57,225 @@ body {
     color: white;
 }
 
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 12px;
+    padding-left: 16px;
+    border-left: 1px solid #e2e8f0;
+}
+
+.nav-username {
+    font-size: 0.9rem;
+    color: #475569;
+    font-weight: 500;
+}
+
+.nav-logout {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    text-decoration: none;
+    padding: 4px 10px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.nav-logout:hover {
+    background: #fee2e2;
+    color: #dc2626;
+    border-color: #fca5a5;
+}
+
+/* ── Login Page ────────────────────────────────────── */
+.login-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.login-wrapper {
+    width: 100%;
+    max-width: 420px;
+    padding: 20px;
+}
+
+.login-card {
+    background: white;
+    border-radius: 16px;
+    padding: 40px 36px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.login-icon {
+    font-size: 3rem;
+    margin-bottom: 12px;
+}
+
+.login-header h1 {
+    font-size: 1.6rem;
+    color: #1e293b;
+    margin-bottom: 6px;
+}
+
+.login-header p {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.login-error {
+    background: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+.form-group input {
+    padding: 12px 14px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.login-btn {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 13px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    margin-top: 4px;
+}
+
+.login-btn:hover { opacity: 0.9; }
+
+/* ── Notifications ─────────────────────────────────── */
+.notif-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.notif-header h2 { margin: 0; }
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: opacity 0.2s;
+}
+
+.download-btn:hover { opacity: 0.85; }
+
+.notif-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.notif-empty {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    padding: 12px 0;
+}
+
+.notif-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.notif-buy  { background: #f0fdf4; border-color: #bbf7d0; }
+.notif-sell { background: #fff1f2; border-color: #fecdd3; }
+
+.notif-icon { font-size: 1.1rem; }
+
+.notif-body {
+    flex: 1;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.notif-action {
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: #e2e8f0;
+    color: #475569;
+}
+
+.notif-buy  .notif-action { background: #dcfce7; color: #15803d; }
+.notif-sell .notif-action { background: #fee2e2; color: #b91c1c; }
+
+.notif-meta { color: #94a3b8; font-size: 0.82rem; }
+
+.notif-date {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    white-space: nowrap;
+}
+
 .container {
     max-width: 1400px;
     margin: 0 auto;
@@ -78,6 +297,14 @@ header h1 {
 .subtitle {
     font-size: 1.1rem;
     opacity: 0.9;
+}
+
+/* Stats side-by-side grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
 }
 
 /* Summary Cards */
@@ -350,6 +577,157 @@ header h1 {
     color: #94a3b8;
     font-size: 0.7rem;
 }
+
+/* ── Notifications page signal summary ─────────────── */
+.signal-summary-meta {
+    font-size: 0.82rem;
+    color: #94a3b8;
+    margin-bottom: 12px;
+}
+
+.signal-summary-counts {
+    display: flex;
+    gap: 16px;
+}
+
+.signal-count-card {
+    flex: 1;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.buy-card  { background: #dcfce7; }
+.hold-card { background: #f1f5f9; }
+.sell-card { background: #fee2e2; }
+
+.sc-number {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.buy-card  .sc-number { color: #15803d; }
+.hold-card .sc-number { color: #475569; }
+.sell-card .sc-number { color: #b91c1c; }
+
+.sc-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin-top: 4px;
+}
+
+.buy-card  .sc-label { color: #15803d; }
+.hold-card .sc-label { color: #475569; }
+.sell-card .sc-label { color: #b91c1c; }
+
+/* ── Holdings P&L Chart ─────────────────────────────── */
+.pnl-chart { display: flex; flex-direction: column; gap: 8px; }
+
+.pnl-row {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    align-items: center;
+    gap: 12px;
+}
+
+.pnl-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #334155;
+    text-align: right;
+}
+
+.pnl-bar-track {
+    background: #f1f5f9;
+    border-radius: 6px;
+    height: 28px;
+    overflow: hidden;
+}
+
+.pnl-bar {
+    height: 100%;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    min-width: 40px;
+    transition: width 0.4s ease;
+}
+
+.pnl-positive { background: linear-gradient(90deg, #10b981, #34d399); }
+.pnl-negative { background: linear-gradient(90deg, #ef4444, #f87171); }
+
+.pnl-value {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: white;
+    white-space: nowrap;
+}
+
+/* ── Signal Sentiment Chart ─────────────────────────── */
+.sentiment-chart { display: flex; flex-direction: column; gap: 6px; }
+
+.sentiment-row {
+    display: grid;
+    grid-template-columns: 48px 1fr 56px;
+    align-items: center;
+    gap: 10px;
+}
+
+.sentiment-date {
+    font-size: 0.75rem;
+    color: #64748b;
+    font-weight: 600;
+    text-align: right;
+}
+
+.sentiment-bar-track {
+    display: flex;
+    height: 22px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #f1f5f9;
+}
+
+.sentiment-seg {
+    height: 100%;
+    transition: width 0.4s ease;
+}
+
+.seg-buy  { background: #10b981; }
+.seg-hold { background: #94a3b8; }
+.seg-sell { background: #ef4444; }
+
+.sentiment-counts {
+    display: flex;
+    gap: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+.sc-buy  { color: #10b981; }
+.sc-sell { color: #ef4444; }
+
+.sentiment-legend {
+    display: flex;
+    gap: 20px;
+    margin-top: 12px;
+    font-size: 0.8rem;
+    color: #475569;
+}
+
+.legend-item { display: flex; align-items: center; gap: 6px; }
+
+.legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+}
+
+.dot-buy  { background: #10b981; }
+.dot-hold { background: #94a3b8; }
+.dot-sell { background: #ef4444; }
 
 /* Holdings List */
 .holdings-list {

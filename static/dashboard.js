@@ -111,6 +111,122 @@ async function loadHoldings() {
     }
 }
 
+// Notifications panel
+async function loadNotifications() {
+    try {
+        const response = await fetch('/api/notifications');
+        const data = await response.json();
+        const container = document.getElementById('notifications-list');
+
+        if (data.length === 0) {
+            container.innerHTML = '<div class="notif-empty">No actions taken in the last run — all positions held.</div>';
+            return;
+        }
+
+        container.innerHTML = data.map(item => {
+            const isBuy = item.type === 'BUY';
+            return `
+                <div class="notif-item notif-${item.type.toLowerCase()}">
+                    <div class="notif-icon">${isBuy ? '🟢' : '🔴'}</div>
+                    <div class="notif-body">
+                        <span class="notif-action">${item.type}</span>
+                        <strong>${item.asset}</strong>
+                        <span class="notif-meta">@ ${formatCurrency(item.price)} · confidence ${item.confidence}</span>
+                    </div>
+                    <div class="notif-date">${item.date}</div>
+                </div>
+            `;
+        }).join('');
+    } catch (error) {
+        console.error('Error loading notifications:', error);
+    }
+}
+
+// Holdings P&L bar chart
+async function loadPnlChart() {
+    try {
+        const response = await fetch('/api/portfolio');
+        const data = await response.json();
+        const container = document.getElementById('pnl-chart');
+
+        if (data.length === 0) {
+            container.innerHTML = '<div class="loading">No holdings available</div>';
+            return;
+        }
+
+        data.sort((a, b) => b.return_pct - a.return_pct);
+        const maxAbs = Math.max(...data.map(d => Math.abs(d.return_pct)), 0.1);
+
+        container.innerHTML = data.map(item => {
+            const width = (Math.abs(item.return_pct) / maxAbs * 100).toFixed(1);
+            const isPos = item.return_pct >= 0;
+            const sign = isPos ? '+' : '';
+            return `
+                <div class="pnl-row">
+                    <div class="pnl-label">${item.asset}</div>
+                    <div class="pnl-bar-track">
+                        <div class="pnl-bar ${isPos ? 'pnl-positive' : 'pnl-negative'}" style="width:${width}%">
+                            <span class="pnl-value">${sign}${item.return_pct.toFixed(2)}%</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    } catch (error) {
+        console.error('Error loading P&L chart:', error);
+    }
+}
+
+// Daily signal sentiment chart
+async function loadSentimentChart() {
+    try {
+        const response = await fetch('/api/trade-history');
+        const data = await response.json();
+        const container = document.getElementById('sentiment-chart');
+
+        if (data.length === 0) {
+            container.innerHTML = '<div class="loading">No trade history available</div>';
+            return;
+        }
+
+        const byDate = {};
+        data.forEach(row => {
+            const date = String(row.date).split(' ')[0];
+            if (!byDate[date]) byDate[date] = { buy: 0, sell: 0, hold: 0 };
+            if (row.decision === 'BUY') byDate[date].buy++;
+            else if (row.decision === 'SELL') byDate[date].sell++;
+            else byDate[date].hold++;
+        });
+
+        const dates = Object.keys(byDate).sort().slice(-14);
+
+        container.innerHTML = dates.map(date => {
+            const d = byDate[date];
+            const total = d.buy + d.sell + d.hold || 1;
+            const buyPct  = (d.buy  / total * 100).toFixed(1);
+            const holdPct = (d.hold / total * 100).toFixed(1);
+            const sellPct = (100 - parseFloat(buyPct) - parseFloat(holdPct)).toFixed(1);
+            const shortDate = date.slice(5); // MM-DD
+            return `
+                <div class="sentiment-row">
+                    <div class="sentiment-date">${shortDate}</div>
+                    <div class="sentiment-bar-track">
+                        <div class="sentiment-seg seg-buy"  style="width:${buyPct}%"  title="BUY ${d.buy}"></div>
+                        <div class="sentiment-seg seg-hold" style="width:${holdPct}%" title="HOLD ${d.hold}"></div>
+                        <div class="sentiment-seg seg-sell" style="width:${sellPct}%" title="SELL ${d.sell}"></div>
+                    </div>
+                    <div class="sentiment-counts">
+                        <span class="sc-buy">${d.buy}B</span>
+                        <span class="sc-sell">${d.sell}S</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    } catch (error) {
+        console.error('Error loading sentiment chart:', error);
+    }
+}
+
 // Utility function to format currency
 function formatCurrency(value) {
     return new Intl.NumberFormat('en-US', {
@@ -224,7 +340,9 @@ async function loadPerformanceChart(asset) {
         
         loadSummary();
         loadAllocationChart();
+        loadPnlChart();
         loadPerformanceAssets();
+        loadSentimentChart();
         loadHoldings();
     }
     
