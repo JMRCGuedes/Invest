@@ -1,5 +1,5 @@
 {
-  "available_cash": 3452.88,
+  "available_cash": 2943.41,
   "portfolio": {
     "AAPL": {
       "quantity": 0,
@@ -18,11 +18,11 @@
       "average_price": 0
     },
     "GOOGL": {
-      "quantity": 1.7,
+      "quantity": 1.9,
       "average_price": 337.73
     },
     "GOOG": {
-      "quantity": 1.69,
+      "quantity": 1.89,
       "average_price": 335.02
     },
     "TSLA": {
@@ -42,11 +42,11 @@
       "average_price": 0
     },
     "INTC": {
-      "quantity": 4.32,
+      "quantity": 4.84,
       "average_price": 128.45
     },
     "CSCO": {
-      "quantity": 4.77,
+      "quantity": 5.34,
       "average_price": 113.88
     },
     "QCOM": {
@@ -78,8 +78,8 @@
       "average_price": 0
     },
     "HON": {
-      "quantity": 10.25,
-      "average_price": 221.97
+      "quantity": 10.52,
+      "average_price": 222.24
     },
     "PEP": {
       "quantity": 0,
@@ -98,11 +98,11 @@
       "average_price": 0
     },
     "CAT": {
-      "quantity": 0.53,
+      "quantity": 0.59,
       "average_price": 998.47
     },
     "JNJ": {
-      "quantity": 2.0,
+      "quantity": 2.24,
       "average_price": 254.91
     },
     "V": {
@@ -110,7 +110,7 @@
       "average_price": 0
     },
     "HD": {
-      "quantity": 1.44,
+      "quantity": 1.61,
       "average_price": 349.21
     },
     "BAC": {
