@@ -102,7 +102,7 @@ def get_signals():
 def get_trade_history():
     try:
         if os.path.exists(TRADE_HISTORY_FILE):
-            df = pd.read_csv(TRADE_HISTORY_FILE)
+            df = pd.read_csv(TRADE_HISTORY_FILE).dropna(subset=['price'])
             return jsonify(df.tail(100).to_dict('records'))
         return jsonify([])
     except Exception as e:
@@ -114,7 +114,7 @@ def get_assets():
     try:
         if not os.path.exists(TRADE_HISTORY_FILE):
             return jsonify([])
-        df = pd.read_csv(TRADE_HISTORY_FILE)
+        df = pd.read_csv(TRADE_HISTORY_FILE).dropna(subset=['price'])
         return jsonify(sorted(df['asset'].unique().tolist()))
     except Exception as e:
         return jsonify([])
@@ -125,7 +125,7 @@ def get_asset_performance(asset):
     try:
         if not os.path.exists(TRADE_HISTORY_FILE):
             return jsonify([])
-        df = pd.read_csv(TRADE_HISTORY_FILE)
+        df = pd.read_csv(TRADE_HISTORY_FILE).dropna(subset=['price'])
         df = df[df['asset'] == asset].copy()
         if df.empty:
             return jsonify([])
@@ -199,7 +199,7 @@ def get_asset_stats():
     try:
         if not os.path.exists(TRADE_HISTORY_FILE):
             return jsonify({"hold_time": [], "profitability": []})
-        df = pd.read_csv(TRADE_HISTORY_FILE)
+        df = pd.read_csv(TRADE_HISTORY_FILE).dropna(subset=['price'])
         df['date_dt'] = pd.to_datetime(df['date'])
         df = df.sort_values('date_dt')
         hold_days = {}
