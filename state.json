@@ -1,5 +1,5 @@
 {
-  "available_cash": 2225.69,
+  "available_cash": 2053.36,
   "portfolio": {
     "AAPL": {
       "quantity": 0,
@@ -42,8 +42,8 @@
       "average_price": 0
     },
     "INTC": {
-      "quantity": 2.95,
-      "average_price": 131.41
+      "quantity": 3.29,
+      "average_price": 131.46
     },
     "CSCO": {
       "quantity": 12.97,
@@ -98,20 +98,20 @@
       "average_price": 0
     },
     "CAT": {
-      "quantity": 1.99,
-      "average_price": 1005.48
+      "quantity": 2.03,
+      "average_price": 1006.05
     },
     "JNJ": {
-      "quantity": 7.59,
-      "average_price": 255.59
+      "quantity": 7.76,
+      "average_price": 255.66
     },
     "V": {
       "quantity": 0,
       "average_price": 0
     },
     "HD": {
-      "quantity": 5.46,
-      "average_price": 349.43
+      "quantity": 5.58,
+      "average_price": 349.47
     },
     "BAC": {
       "quantity": 0,
