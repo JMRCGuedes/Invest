@@ -1,5 +1,5 @@
 {
-  "available_cash": 55.66,
+  "available_cash": 53.64,
   "portfolio": {
     "AAPL": {
       "quantity": 0.35,
@@ -86,7 +86,7 @@
       "average_price": 0
     },
     "KO": {
-      "quantity": 9.25,
+      "quantity": 9.26,
       "average_price": 83.31
     },
     "MCD": {
@@ -114,7 +114,7 @@
       "average_price": 351.41
     },
     "BAC": {
-      "quantity": 11.15,
+      "quantity": 11.17,
       "average_price": 58.66
     },
     "JPM": {
