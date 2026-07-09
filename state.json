@@ -1,5 +1,5 @@
 {
-  "available_cash": 936.94,
+  "available_cash": 847.94,
   "portfolio": {
     "AAPL": {
       "quantity": 0.35,
@@ -74,8 +74,8 @@
       "average_price": 0
     },
     "AMGN": {
-      "quantity": 3.06,
-      "average_price": 371.11
+      "quantity": 3.11,
+      "average_price": 370.98
     },
     "HON": {
       "quantity": 0,
@@ -86,8 +86,8 @@
       "average_price": 0
     },
     "KO": {
-      "quantity": 15.32,
-      "average_price": 83.47
+      "quantity": 15.54,
+      "average_price": 83.46
     },
     "MCD": {
       "quantity": 0,
@@ -102,20 +102,20 @@
       "average_price": 0
     },
     "JNJ": {
-      "quantity": 13.23,
-      "average_price": 258.08
+      "quantity": 13.3,
+      "average_price": 258.09
     },
     "V": {
-      "quantity": 0.99,
-      "average_price": 348.4
+      "quantity": 1.04,
+      "average_price": 348.33
     },
     "HD": {
       "quantity": 0,
       "average_price": 0
     },
     "BAC": {
-      "quantity": 20.31,
-      "average_price": 58.62
+      "quantity": 20.6,
+      "average_price": 58.63
     },
     "JPM": {
       "quantity": 0.15,
