@@ -1,5 +1,5 @@
 {
-  "available_cash": 74.6,
+  "available_cash": 72.27,
   "portfolio": {
     "AAPL": {
       "quantity": 0.35,
@@ -46,7 +46,7 @@
       "average_price": 0
     },
     "CSCO": {
-      "quantity": 14.21,
+      "quantity": 14.22,
       "average_price": 113.76
     },
     "QCOM": {
@@ -114,7 +114,7 @@
       "average_price": 0
     },
     "BAC": {
-      "quantity": 23.45,
+      "quantity": 23.47,
       "average_price": 58.71
     },
     "JPM": {
