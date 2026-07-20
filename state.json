@@ -1,5 +1,5 @@
 {
-  "available_cash": 66.12,
+  "available_cash": 708.62,
   "portfolio": {
     "AAPL": {
       "quantity": 0.94,
@@ -22,8 +22,8 @@
       "average_price": 0
     },
     "GOOG": {
-      "quantity": 1.87,
-      "average_price": 356.67
+      "quantity": 0,
+      "average_price": 0
     },
     "TSLA": {
       "quantity": 0,
@@ -114,8 +114,8 @@
       "average_price": 0
     },
     "BAC": {
-      "quantity": 27.24,
-      "average_price": 59.03
+      "quantity": 27.48,
+      "average_price": 59.04
     },
     "JPM": {
       "quantity": 0.74,
