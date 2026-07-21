@@ -1,5 +1,5 @@
 asset,type,quantity,average_price,current_price,invested_value,current_value,profit,return_pct
-AAPL,Stock,1.36,325.21,327.74,442.29,445.73,3.44,0.78
+AAPL,Stock,1.39,325.27,327.74,452.13,455.56,3.43,0.76
 CSCO,Stock,14.22,113.76,112.18,1617.67,1595.2,-22.47,-1.39
 AMGN,Stock,3.55,370.18,366.24,1314.14,1300.15,-13.99,-1.06
 KO,Stock,17.54,83.4,81.97,1462.84,1437.75,-25.08,-1.71
