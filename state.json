@@ -1,5 +1,5 @@
 {
-  "available_cash": 82.83,
+  "available_cash": 80.88,
   "portfolio": {
     "AAPL": {
       "quantity": 2.58,
@@ -126,7 +126,7 @@
       "average_price": 0
     },
     "CVX": {
-      "quantity": 0.84,
+      "quantity": 0.85,
       "average_price": 195.29
     },
     "XOM": {
