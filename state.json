@@ -1,9 +1,9 @@
 {
-  "available_cash": 116.16,
+  "available_cash": 107.34,
   "portfolio": {
     "AAPL": {
-      "quantity": 2.54,
-      "average_price": 325.63
+      "quantity": 2.55,
+      "average_price": 325.66
     },
     "MSFT": {
       "quantity": 0,
@@ -118,15 +118,15 @@
       "average_price": 59.16
     },
     "JPM": {
-      "quantity": 1.64,
-      "average_price": 345.44
+      "quantity": 1.65,
+      "average_price": 345.49
     },
     "UNH": {
       "quantity": 0,
       "average_price": 0
     },
     "CVX": {
-      "quantity": 0.81,
+      "quantity": 0.82,
       "average_price": 195.29
     },
     "XOM": {
