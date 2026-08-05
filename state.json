@@ -1,5 +1,5 @@
 {
-  "available_cash": 727.84,
+  "available_cash": 673.48,
   "portfolio": {
     "AAPL": {
       "quantity": 0.16,
@@ -14,8 +14,8 @@
       "average_price": 0
     },
     "AMZN": {
-      "quantity": 2.38,
-      "average_price": 281.3
+      "quantity": 2.43,
+      "average_price": 281.1
     },
     "GOOGL": {
       "quantity": 0,
@@ -46,8 +46,8 @@
       "average_price": 0
     },
     "CSCO": {
-      "quantity": 24.91,
-      "average_price": 115.18
+      "quantity": 25.03,
+      "average_price": 115.22
     },
     "QCOM": {
       "quantity": 0,
@@ -118,8 +118,8 @@
       "average_price": 0
     },
     "JPM": {
-      "quantity": 2.93,
-      "average_price": 349.75
+      "quantity": 2.97,
+      "average_price": 349.89
     },
     "UNH": {
       "quantity": 0,
@@ -138,8 +138,8 @@
       "average_price": 0
     },
     "LMT": {
-      "quantity": 1.24,
-      "average_price": 585.31
+      "quantity": 1.26,
+      "average_price": 585.25
     },
     "BLK": {
       "quantity": 0,
