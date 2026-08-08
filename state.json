@@ -1,5 +1,5 @@
 {
-  "available_cash": 175.8,
+  "available_cash": 172.15,
   "portfolio": {
     "AAPL": {
       "quantity": 0.16,
@@ -46,8 +46,8 @@
       "average_price": 0
     },
     "CSCO": {
-      "quantity": 26.8,
-      "average_price": 115.67
+      "quantity": 26.83,
+      "average_price": 115.68
     },
     "QCOM": {
       "quantity": 0,
