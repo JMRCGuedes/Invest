@@ -1,5 +1,5 @@
 {
-  "available_cash": 1350.29,
+  "available_cash": 1297.2,
   "portfolio": {
     "AAPL": {
       "quantity": 0,
@@ -74,8 +74,8 @@
       "average_price": 0
     },
     "AMGN": {
-      "quantity": 3.99,
-      "average_price": 418.97
+      "quantity": 4.05,
+      "average_price": 419.35
     },
     "HON": {
       "quantity": 0,
@@ -126,8 +126,8 @@
       "average_price": 0
     },
     "CVX": {
-      "quantity": 14.36,
-      "average_price": 196.55
+      "quantity": 14.49,
+      "average_price": 196.61
     },
     "XOM": {
       "quantity": 0,
