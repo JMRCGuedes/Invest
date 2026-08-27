@@ -1,9 +1,9 @@
 {
-  "available_cash": 138.36,
+  "available_cash": 997.67,
   "portfolio": {
     "AAPL": {
-      "quantity": 0.07,
-      "average_price": 313.4
+      "quantity": 0.08,
+      "average_price": 313.59
     },
     "MSFT": {
       "quantity": 0,
@@ -54,8 +54,8 @@
       "average_price": 0
     },
     "CRM": {
-      "quantity": 0.54,
-      "average_price": 205.9
+      "quantity": 0,
+      "average_price": 0
     },
     "AVGO": {
       "quantity": 0,
@@ -74,8 +74,8 @@
       "average_price": 0
     },
     "AMGN": {
-      "quantity": 5.23,
-      "average_price": 424.88
+      "quantity": 5.24,
+      "average_price": 424.9
     },
     "HON": {
       "quantity": 0,
@@ -114,8 +114,8 @@
       "average_price": 0
     },
     "BAC": {
-      "quantity": 11.96,
-      "average_price": 64.52
+      "quantity": 0,
+      "average_price": 0
     },
     "JPM": {
       "quantity": 5.6,
