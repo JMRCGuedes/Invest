@@ -1,9 +1,9 @@
 {
-  "available_cash": 801.28,
+  "available_cash": 785.28,
   "portfolio": {
     "AAPL": {
-      "quantity": 0.64,
-      "average_price": 318.74
+      "quantity": 0.69,
+      "average_price": 318.83
     },
     "MSFT": {
       "quantity": 0,

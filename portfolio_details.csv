@@ -1,5 +1,5 @@
 asset,type,quantity,average_price,current_price,invested_value,current_value,profit,return_pct
-AAPL,Stock,0.64,318.74,319.7,203.99,204.61,0.61,0.3
+AAPL,Stock,0.69,318.83,319.7,219.99,220.59,0.6,0.27
 AMZN,Stock,2.44,263.32,266.43,642.5,650.09,7.59,1.18
 AMD,Stock,0.03,486.12,465.58,14.58,13.97,-0.62,-4.23
 AMGN,Stock,5.28,424.99,432.42,2243.95,2283.18,39.23,1.75
