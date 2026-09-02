@@ -1,9 +1,9 @@
 {
-  "available_cash": 602.28,
+  "available_cash": 576.59,
   "portfolio": {
     "AAPL": {
-      "quantity": 1.14,
-      "average_price": 319.38
+      "quantity": 1.18,
+      "average_price": 319.59
     },
     "MSFT": {
       "quantity": 0,
@@ -126,8 +126,8 @@
       "average_price": 0
     },
     "CVX": {
-      "quantity": 17.15,
-      "average_price": 197.59
+      "quantity": 17.21,
+      "average_price": 197.64
     },
     "XOM": {
       "quantity": 0,
