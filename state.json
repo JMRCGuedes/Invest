@@ -1,9 +1,9 @@
 {
-  "available_cash": 552.33,
+  "available_cash": 521.9,
   "portfolio": {
     "AAPL": {
-      "quantity": 1.98,
-      "average_price": 321.98
+      "quantity": 2.01,
+      "average_price": 321.95
     },
     "MSFT": {
       "quantity": 0,
@@ -54,8 +54,8 @@
       "average_price": 0
     },
     "CRM": {
-      "quantity": 0.37,
-      "average_price": 263.4
+      "quantity": 0.41,
+      "average_price": 263.02
     },
     "AVGO": {
       "quantity": 0,
@@ -126,8 +126,8 @@
       "average_price": 0
     },
     "CVX": {
-      "quantity": 18.4,
-      "average_price": 198.53
+      "quantity": 18.45,
+      "average_price": 198.56
     },
     "XOM": {
       "quantity": 0,
