@@ -1,9 +1,9 @@
 {
-  "available_cash": 394.62,
+  "available_cash": 363.65,
   "portfolio": {
     "AAPL": {
-      "quantity": 4.92,
-      "average_price": 320.87
+      "quantity": 4.94,
+      "average_price": 320.92
     },
     "MSFT": {
       "quantity": 0,
@@ -38,8 +38,8 @@
       "average_price": 0
     },
     "AMD": {
-      "quantity": 0.52,
-      "average_price": 511.06
+      "quantity": 0.54,
+      "average_price": 511.27
     },
     "INTC": {
       "quantity": 0,
@@ -74,8 +74,8 @@
       "average_price": 0
     },
     "AMGN": {
-      "quantity": 1.99,
-      "average_price": 388.32
+      "quantity": 2.01,
+      "average_price": 388.21
     },
     "HON": {
       "quantity": 0,
@@ -126,8 +126,8 @@
       "average_price": 0
     },
     "CVX": {
-      "quantity": 22.83,
-      "average_price": 201.17
+      "quantity": 22.86,
+      "average_price": 201.19
     },
     "XOM": {
       "quantity": 0,
