@@ -1,9 +1,9 @@
 {
-  "available_cash": 385.01,
+  "available_cash": 358.29,
   "portfolio": {
     "AAPL": {
-      "quantity": 5.36,
-      "average_price": 321.82
+      "quantity": 5.38,
+      "average_price": 321.86
     },
     "MSFT": {
       "quantity": 0,
@@ -38,8 +38,8 @@
       "average_price": 0
     },
     "AMD": {
-      "quantity": 0.85,
-      "average_price": 510.3
+      "quantity": 0.86,
+      "average_price": 510.33
     },
     "INTC": {
       "quantity": 0,
@@ -50,7 +50,7 @@
       "average_price": 0
     },
     "QCOM": {
-      "quantity": 0.04,
+      "quantity": 0.08,
       "average_price": 185.02
     },
     "CRM": {
@@ -114,8 +114,8 @@
       "average_price": 0
     },
     "BAC": {
-      "quantity": 1.65,
-      "average_price": 59.18
+      "quantity": 1.78,
+      "average_price": 59.09
     },
     "JPM": {
       "quantity": 5.66,
