@@ -417,5 +417,11 @@ def download_report():
     response.headers['Content-Disposition'] = f'attachment; filename={filename}'
     return response
 
+@app.route('/sw.js')
+def service_worker():
+    resp = app.send_static_file('sw.js')
+    resp.headers['Service-Worker-Allowed'] = '/'
+    return resp
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
