@@ -874,18 +874,113 @@ tbody tr:hover {
     color: #92400e;
 }
 
-/* Responsive */
+/* ── Safe-area / notch support ──────────────────────── */
+.navbar {
+    padding-top: max(15px, env(safe-area-inset-top));
+}
+
+/* ── Bottom navigation (mobile only) ───────────────── */
+.bottom-nav {
+    display: none;
+}
+
+/* ── Mobile / PWA ───────────────────────────────────── */
 @media (max-width: 768px) {
-    header h1 {
-        font-size: 1.8rem;
+    /* Slim top navbar: hide page links, keep brand + logout */
+    .nav-links a.nav-link { display: none; }
+    .nav-user {
+        border-left: none;
+        margin-left: auto;
+        padding-left: 0;
     }
-    
-    .summary-grid,
-    .charts-grid {
-        grid-template-columns: 1fr;
+    .nav-username { display: none; }
+    .navbar { padding: max(12px, env(safe-area-inset-top)) 16px 12px; margin-bottom: 0; }
+
+    /* Bottom navigation bar */
+    .bottom-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0; left: 0; right: 0;
+        background: white;
+        border-top: 1px solid #e2e8f0;
+        box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+        z-index: 1000;
+        padding-bottom: env(safe-area-inset-bottom);
     }
-    
-    .card-value {
-        font-size: 1.5rem;
+
+    .bottom-nav-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 4px 8px;
+        text-decoration: none;
+        color: #94a3b8;
+        font-size: 0.62rem;
+        font-weight: 600;
+        gap: 3px;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
     }
+
+    .bottom-nav-item.active { color: #667eea; }
+    .bottom-nav-icon { font-size: 1.3rem; line-height: 1; }
+
+    /* Pad content above bottom nav + iPhone home indicator */
+    .container {
+        padding: 16px 12px calc(68px + env(safe-area-inset-bottom));
+    }
+
+    /* Header */
+    header { margin-bottom: 20px; }
+    header h1 { font-size: 1.6rem; }
+
+    /* 2-column summary grid */
+    .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    /* Stack stats side-by-side grid */
+    .stats-grid { grid-template-columns: 1fr; }
+
+    /* Tighter cards */
+    .card { padding: 16px; margin-bottom: 16px; }
+    .card h2 { font-size: 1.1rem; margin-bottom: 16px; }
+    .card-value { font-size: 1.4rem; }
+
+    /* Chart controls: stack vertically on mobile */
+    .chart-header-controls { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .asset-selector { width: 100%; }
+    .asset-selector select { width: 100%; min-width: unset; }
+
+    /* Notification header: stack download button */
+    .notif-header { flex-direction: column; gap: 12px; align-items: flex-start; }
+    .download-btn { width: 100%; text-align: center; justify-content: center; }
+
+    /* Signal count cards: tighter */
+    .signal-summary-counts { gap: 8px; }
+    .sc-number { font-size: 1.6rem; }
+    .signal-count-card { padding: 14px 8px; }
+
+    /* Login page */
+    .login-wrapper { padding: 16px; }
+    .login-card { padding: 28px 20px; border-radius: 12px; }
+
+    /* Touch-friendly logout button */
+    .nav-logout { padding: 8px 14px; }
+    .login-btn { touch-action: manipulation; }
+
+    /* PnL label width: tighter */
+    .pnl-row { grid-template-columns: 48px 1fr; }
+    .pnl-label { font-size: 0.75rem; }
+
+    /* Sentiment row: tighter date */
+    .sentiment-row { grid-template-columns: 38px 1fr 48px; gap: 6px; }
+    .sentiment-date { font-size: 0.68rem; }
+}
+
+@media (min-width: 769px) {
+    .bottom-nav { display: none !important; }
 }

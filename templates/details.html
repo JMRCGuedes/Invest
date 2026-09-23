@@ -149,6 +149,25 @@
         </div>
     </div>
 
+    <nav class="bottom-nav">
+        <a href="/" class="bottom-nav-item">
+            <span class="bottom-nav-icon">📊</span>
+            <span>Dashboard</span>
+        </a>
+        <a href="/details" class="bottom-nav-item active">
+            <span class="bottom-nav-icon">📋</span>
+            <span>Details</span>
+        </a>
+        <a href="/notifications" class="bottom-nav-item">
+            <span class="bottom-nav-icon">🔔</span>
+            <span>Alerts</span>
+        </a>
+        <a href="/logout" class="bottom-nav-item">
+            <span class="bottom-nav-icon">👤</span>
+            <span>Sign out</span>
+        </a>
+    </nav>
+
     <script src="{{ url_for('static', filename='details.js') }}"></script>
 </body>
 </html>
