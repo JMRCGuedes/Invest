@@ -1,145 +1,108 @@
-# Technical Development Plan — 6 Months
+# Individual Development Plan (IDP) – Aug 2026 to Jan 2027
 
-Each month has a main theme, concepts to study in depth, concrete improvements to apply to current applications, and a soft skills component tied to the technical theme.
+3Q, 2026 · @João Guedes
 
-## Suggested rhythm
+## Objective
 
-- **Weeks 1–2:** study the theory and experiment in a personal project.
-- **Weeks 3–4:** apply one of the improvements at work and document the result (before vs. after, with numbers).
+Over 6 months (August 2026 to January 2027) I will modernise my Angular skills, get more out of AI agents, sharpen critical thinking and communication, and then deepen Kafka, authentication, Kubernetes and logging tools. Months 1–3 are done.
 
-> At the start and end of the plan, ask 2 or 3 trusted colleagues for feedback to measure soft skills progress.
+The self-assessment below uses a 1–5 scale: **1** = basic awareness, **2** = can work with help, **3** = independent day to day, **4** = advanced, can guide others, **5** = expert / reference in the team. The target is where I want to be by March 2027.
 
----
+## Technical skills self-assessment
 
-## Month 1 — Modern Java and JVM performance
+Strongest areas are day-to-day delivery (Java, Angular, Git, Docker); the biggest gaps are in system design, cloud and observability. Adjust the scores to your own view.
 
-### Deep dive
-- Recent Java features (21 and 25 LTS): records, sealed classes, pattern matching and **virtual threads**.
-- JVM garbage collectors (G1, ZGC) and how to tune them.
-- Profiling with **Java Flight Recorder** and **async-profiler**.
-- Quarkus native compilation with GraalVM.
+| Skill | Current (1–5) | Target (1–5) | Notes |
+| --- | --- | --- | --- |
+| Java / Spring Boot / Quarkus | 4 | 4 | Solid; keep up with new Java versions (virtual threads, records) |
+| Angular / TypeScript | 4 | 4 | Signals and Resource API adopted for API requests (month 1) |
+| Kafka | 3 | 4 | Go deeper on partitioning, consumer groups, error handling / DLQ |
+| Elasticsearch | 3 | 4 | Improve query tuning, mappings and index design |
+| MongoDB | 3 | 3 | Maintain; review indexing and aggregation pipelines |
+| SQL / relational DBs | 3 | 3 | Maintain |
+| Docker | 3 | 4 | Multi-stage builds, image security, compose for local envs |
+| Kubernetes | 2 | 3 | Deployments, services, config maps, basic troubleshooting |
+| Cloud (AWS / Azure / GCP) | 2 | 3 | Core services; aim for one associate-level certification |
+| CI/CD pipelines | 3 | 4 | Own and improve the team pipeline |
+| Automated testing (unit, integration, e2e) | 3 | 4 | Raise coverage; Testcontainers, contract tests |
+| System design / architecture | 2 | 3 | Event-driven patterns, scalability, trade-off docs |
+| Observability (logs, metrics, tracing) | 2 | 3 | OpenTelemetry, dashboards, alerting |
+| Security basics (OWASP, auth) | 2 | 3 | OWASP Top 10, OAuth2 / JWT |
+| AI usage (assistants, prompting, LLM APIs) | 3 | 4 | Building own agents and skills; running multiple agents in VS Code (month 2) |
+| Git & code review | 4 | 4 | Maintain |
 
-### Improvements to make
-- [ ] Profile a slow endpoint and identify where time is actually spent (N+1 queries, serialization, etc.).
-- [ ] Review connection pools and timeouts.
-- [ ] Test virtual threads in I/O-heavy services and measure the difference.
+## Soft skills self-assessment
 
-### Soft skill — Written communication
-- [ ] Write a short profiling report: problem, analysis and result with numbers.
-- [ ] Write two versions: a technical one for the team and a three-sentence one for management.
+Teamwork and problem solving are strengths; the growth areas are communicating technical ideas, mentoring and managing priorities.
 
----
+| Skill | Current (1–5) | Target (1–5) | Notes |
+| --- | --- | --- | --- |
+| Teamwork & collaboration | 4 | 4 | Maintain |
+| Problem solving | 4 | 4 | Maintain |
+| Adaptability / learning new tech | 4 | 4 | Maintain |
+| Critical thinking | 3 | 4 | Review and challenge AI output instead of accepting it (month 3) |
+| Communication (written & verbal) | 3 | 4 | Describe and define goals and their definition of done clearly (month 3) |
+| Presenting to a group | 2 | 3 | Run tech talks / demos |
+| Time management & prioritisation | 3 | 4 | Better estimates, fewer context switches |
+| Ownership / proactivity | 3 | 4 | Propose improvements, not just deliver tickets |
+| Mentoring & knowledge sharing | 2 | 3 | Share Signals and AI agent learnings with the team |
+| Stakeholder management | 2 | 3 | Talk with product / business, explain trade-offs |
 
-## Month 2 — Advanced Angular
+## Key growth areas
 
-### Deep dive
-- **Signals** and the new reactive model.
-- Standalone components and zoneless applications.
-- `@defer` for deferred loading and OnPush change detection.
-- State management with NgRx SignalStore.
-- Testing with Jest/Vitest (unit) and **Playwright** (end-to-end).
+Six focus areas, one per month. The first three are complete.
 
-### Improvements to make
-- [ ] Measure the app with Lighthouse and the Angular DevTools profiler; fix components that re-render too often.
-- [ ] Analyze bundle size (`source-map-explorer`) and apply lazy loading where missing.
-- [ ] Use virtual scroll in large tables.
-- [ ] Gradually migrate complex RxJS code to signals where it makes sense.
+1. **Modern Angular** – Signals and the Resource API for API requests.
+2. **AI agents** – useful daily agents and skills; multiple agents on several tickets and projects.
+3. **Critical thinking & communication** – challenge AI output; define goals and their definition clearly.
+4. **Kafka & authentication** – deeper Kafka knowledge and how JWT-based auth works.
+5. **Kubernetes** – learn it and use it in real work at LO.
+6. **Logging & monitoring** – get more out of Splunk and Elastic APM at LO.
 
-### Soft skill — Empathy
-- [ ] Watch 2 or 3 users using the application and ask what frustrates them.
-- [ ] Use that feedback to prioritize optimizations.
+## 6-month plan
 
----
+About 2–3 hours per week of learning, applied in real work. Months 1–3 are complete.
 
-## Month 3 — Kafka and distributed systems
+### Month 1 – August 2026: Modern Angular
 
-### Deep dive
-- Internals: partitions, replication, consumer rebalancing.
-- Delivery guarantees and **exactly-once** semantics.
-- **Kafka Streams** for stateful processing.
-- Schema Registry with Avro or Protobuf.
-- Patterns: Outbox, Saga, idempotency, CQRS.
-- Recommended reading: *Designing Data-Intensive Applications* (Martin Kleppmann).
+- [x] Learn and use all types of Signals (signal, computed, effect, input/output signals)
+- [x] Use the Resource API for API requests
 
-### Improvements to make
-- [ ] Monitor **consumer lag** and set up alerts.
-- [ ] Ensure consumers are idempotent, with retries and a dead letter queue.
-- [ ] Review partition key choices.
+### Month 2 – September 2026: AI agents
 
-### Soft skill — Problem solving
-- [ ] Run a root cause analysis (5 Whys) on a real or simulated incident.
-- [ ] Write a blameless post-mortem focused on system and process improvements.
+- [x] Create agents and skills that are useful in daily work
+- [x] Use the VS Code agents view to run multiple agents on multiple tickets and projects
 
----
+### Month 3 – October 2026: Critical thinking & communication
 
-## Month 4 — Elasticsearch in depth
+- [x] Review and challenge AI-generated output instead of accepting it as is
+- [x] Describe and define clearly the goal and its definition before starting work
 
-### Deep dive
-- Mappings and analyzers.
-- Relevance tuning: BM25, boosting, function score.
-- Aggregations.
-- **Vector and hybrid search** (kNN + text search).
-- Operations: sharding, ILM (index lifecycle management), zero-downtime reindexing with aliases.
+### Month 4 – November 2026: Kafka & JWT authentication
 
-### Improvements to make
-- [ ] Analyze the slowest queries with the Profile API.
-- [ ] Review dynamic mappings that create unnecessary fields.
-- [ ] Implement aliases to reindex without affecting users.
+- [ ] Study Kafka in more depth (partitions, consumer groups, retries, dead-letter topics)
+- [ ] Learn more about JWT and authentication (tokens, validation, refresh, OAuth2 flows)
 
-### Soft skill — Teamwork
-- [ ] Pair program with a colleague on search tuning.
-- [ ] Mentor a more junior colleague on a technical topic.
+### Month 5 – December 2026: Kubernetes
 
----
+- [ ] Complete a Kubernetes course
+- [ ] Apply Kubernetes knowledge in real work at LO
 
-## Month 5 — AI and LLM engineering
+### Month 6 – January 2027: Logging tools & review
 
-### Deep dive
-- Advanced RAG: chunking, re-ranking, hybrid search.
-- Tool calling and agents.
-- **Model Context Protocol (MCP)**.
-- **Evaluation (evals)** of LLM-based systems.
-- Java frameworks: **LangChain4j** (with Quarkus integration) and **Spring AI**; Python for quick experimentation.
+- [ ] Explore the logging and monitoring tools at LO (Splunk and Elastic APM)
+- [ ] Review everything with my manager and redo the self-assessment
 
-### Improvements to make
-- [ ] Build an MCP server that exposes internal data or tools to an assistant.
-- [ ] Build an evaluation test set for an existing LLM feature.
-- [ ] Use AI in your own workflow: test generation, code review, migrations.
+## Success metrics & follow-up
 
-### Soft skill — Creativity
-- [ ] Identify 3 everyday problems for the team or users where AI could help.
-- [ ] Pick one and present a short proposal with benefits, risks and how to measure success.
+Success means reaching the target scores above with concrete evidence for each focus area by January 2027.
 
----
+| Focus area | Evidence of success |
+| --- | --- |
+| Modern Angular | Signals and Resource API used in production code (done) |
+| AI agents | Own agents / skills in daily use; parallel agents on tickets (done) |
+| Critical thinking & communication | AI output reviewed before merging; goals written with a clear definition (done) |
+| Kafka & authentication | 1 Kafka improvement shipped; can explain and implement JWT auth |
+| Kubernetes | Course completed; used in a real task at LO |
+| Logging & monitoring | Using Splunk and Elastic APM to investigate issues at LO |
 
-## Month 6 — Platform: OpenShift, CI/CD and observability
-
-### Deep dive
-- Kubernetes/OpenShift: resource requests and limits, probes, HPA, network policies.
-- Helm or Kustomize.
-- **GitOps with ArgoCD**.
-- Observability with **OpenTelemetry**: distributed traces, metrics (Prometheus/Grafana) and structured logs.
-- Goal: **Red Hat EX288** certification (OpenShift Application Developer).
-
-### Improvements to make
-- [ ] Add distributed tracing from Angular, through the backend, to Kafka.
-- [ ] Review pod CPU and memory limits.
-- [ ] Optimize Docker images (multi-stage builds, minimal base images).
-- [ ] Add vulnerability scanning to the pipeline (Trivy).
-
-### Soft skill — Public speaking
-- [ ] Present the 6 months of improvements to the team (or at a meetup), with before and after numbers.
-- [ ] Ask colleagues for final feedback and compare it with the initial feedback.
-
----
-
-## Progress log
-
-| Month | Theme | Improvement applied | Result (before → after) |
-|-------|-------|---------------------|-------------------------|
-| 1 | Java and JVM | | |
-| 2 | Angular | | |
-| 3 | Kafka | | |
-| 4 | Elasticsearch | | |
-| 5 | AI and LLMs | | |
-| 6 | OpenShift and observability | | |
