@@ -1,5 +1,5 @@
 {
-  "available_cash": 5459.67,
+  "available_cash": 5036.62,
   "portfolio": {
     "AAPL": {
       "quantity": 0,
@@ -38,11 +38,11 @@
       "average_price": 0
     },
     "AMD": {
-      "quantity": 1.33,
-      "average_price": 609.07
+      "quantity": 1.51,
+      "average_price": 608.96
     },
     "INTC": {
-      "quantity": 6.81,
+      "quantity": 7.73,
       "average_price": 116.07
     },
     "CSCO": {
@@ -50,8 +50,8 @@
       "average_price": 0
     },
     "QCOM": {
-      "quantity": 4.18,
-      "average_price": 186.2
+      "quantity": 4.75,
+      "average_price": 185.97
     },
     "CRM": {
       "quantity": 0,
@@ -74,8 +74,8 @@
       "average_price": 0
     },
     "AMGN": {
-      "quantity": 3.55,
-      "average_price": 418.15
+      "quantity": 3.79,
+      "average_price": 418.52
     },
     "HON": {
       "quantity": 0,
