@@ -1,5 +1,5 @@
 {
-  "available_cash": 1995.64,
+  "available_cash": 1878.99,
   "portfolio": {
     "AAPL": {
       "quantity": 0,
@@ -38,8 +38,8 @@
       "average_price": 0
     },
     "AMD": {
-      "quantity": 3.93,
-      "average_price": 618.19
+      "quantity": 3.99,
+      "average_price": 618.44
     },
     "INTC": {
       "quantity": 13.99,
@@ -70,12 +70,12 @@
       "average_price": 0
     },
     "TXN": {
-      "quantity": 2.72,
+      "quantity": 2.85,
       "average_price": 294.16
     },
     "AMGN": {
-      "quantity": 7.31,
-      "average_price": 413.74
+      "quantity": 7.41,
+      "average_price": 413.6
     },
     "HON": {
       "quantity": 0,
