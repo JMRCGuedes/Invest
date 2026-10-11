@@ -1,5 +1,5 @@
 {
-  "available_cash": 1780.29,
+  "available_cash": 1677.43,
   "portfolio": {
     "AAPL": {
       "quantity": 0,
@@ -46,8 +46,8 @@
       "average_price": 0
     },
     "CSCO": {
-      "quantity": 3.2,
-      "average_price": 118.19
+      "quantity": 3.5,
+      "average_price": 118.22
     },
     "QCOM": {
       "quantity": 0,
@@ -70,12 +70,12 @@
       "average_price": 0
     },
     "TXN": {
-      "quantity": 5.99,
-      "average_price": 291.35
+      "quantity": 6.11,
+      "average_price": 291.21
     },
     "AMGN": {
-      "quantity": 9.26,
-      "average_price": 412.86
+      "quantity": 9.34,
+      "average_price": 412.88
     },
     "HON": {
       "quantity": 0,
