@@ -2,8 +2,8 @@
   "available_cash": NaN,
   "portfolio": {
     "AAPL": {
-      "quantity": 5.32,
-      "average_price": 343.54
+      "quantity": 0,
+      "average_price": 0
     },
     "MSFT": {
       "quantity": 0,

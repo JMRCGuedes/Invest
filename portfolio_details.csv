@@ -1,3 +1,2 @@
 asset,type,quantity,average_price,current_price,invested_value,current_value,profit,return_pct
-AAPL,Stock,5.32,343.54,331.9,1827.63,1765.71,-61.92,-3.39
-BLK,Stock,0.06,1126.73,1161.32,67.6,69.68,2.08,3.07
+BLK,Stock,0.06,1126.73,1225.09,67.6,73.51,5.9,8.73
